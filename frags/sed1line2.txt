@@ -1,0 +1,308 @@
+Informatica, Oracle, Netezza, Unix, Hadoop Tutorials and Examples
+Unix Sed Command to Delete Lines in File - 15 Examples
+Vijay Bhaskar3/07/201314 Comments
+
+
+Sed Command to Delete Lines: Sed command can be used to delete or remove specific lines which matches a given pattern or in a particular position in a file. Here we will see how to delete lines using sed command with various examples.
+
+The following file contains a sample data which is used as input file in all the examples:
+> cat file
+linux
+unix
+fedora
+debian
+ubuntu
+
+Sed Command to Delete Lines - Based on Position in File
+
+In the following examples, the sed command removes the lines in file that are in a particular position in a file.
+
+1. Delete first line or header line
+
+The d option in sed command is used to delete a line. The syntax for deleting a line is:
+> sed 'Nd' file
+
+Here N indicates Nth line in a file. In the following example, the sed command removes the first line in a file.
+> sed '1d' file
+unix
+fedora
+debian
+ubuntu
+
+2. Delete last line or footer line or trailer line
+
+The following sed command is used to remove the footer line in a file. The $ indicates the last line of a file.
+> sed '$d' file
+linux
+unix
+fedora
+debian
+
+3. Delete particular line
+
+This is similar to the first example. The below sed command removes the second line in a file.
+> sed '2d' file
+linux
+fedora
+debian
+ubuntu
+
+4. Delete range of lines
+
+The sed command can be used to delete a range of lines. The syntax is shown below:
+> sed 'm,nd' file
+
+Here m and n are min and max line numbers. The sed command removes the lines from m to n in the file. The following sed command deletes the lines ranging from 2 to 4:
+> sed '2,4d' file
+linux
+ubuntu
+
+5. Delete lines other than the first line or header line
+
+Use the negation (!) operator with d option in sed command. The following sed command removes all the lines except the header line.
+> sed '1!d' file
+linux
+
+6. Delete lines other than last line or footer line
+> sed '$!d' file
+ubuntu
+
+7. Delete lines other than the specified range
+> sed '2,4!d' file
+unix
+fedora
+debian
+
+Here the sed command removes lines other than 2nd, 3rd and 4th.
+
+8. Delete first and last line
+
+You can specify the list of lines you want to remove in sed command with semicolon as a delimiter.
+> sed '1d;$d' file
+unix
+fedora
+debian
+
+9. Delete empty lines or blank lines
+> sed '/^$/d' file
+
+The ^$ indicates sed command to delete empty lines. However, this sed do not remove the lines that contain spaces.
+
+Sed Command to Delete Lines - Based on Pattern Match
+
+In the following examples, the sed command deletes the lines in file which match the given pattern.
+
+10. Delete lines that begin with specified character
+> sed '/^u/d' file
+linux
+fedora
+debian
+
+^ is to specify the starting of the line. Above sed command removes all the lines that start with character 'u'.
+
+11. Delete lines that end with specified character
+> sed '/x$/d' file
+fedora
+debian
+ubuntu
+
+$ is to indicate the end of the line. The above command deletes all the lines that end with character 'x'.
+
+12. Delete lines which are in upper case or capital letters
+> sed '/^[A-Z]*$/d' file
+
+13. Delete lines that contain a pattern
+> sed '/debian/d' file
+linux
+unix
+fedora
+ubuntu
+
+14. Delete lines starting from a pattern till the last line
+> sed '/fedora/,$d' file
+linux
+unix
+
+Here the sed command removes the line that matches the pattern fedora and also deletes all the lines to the end of the file which appear next to this matching line.
+
+15. Delete last line only if it contains the pattern
+> sed '${/ubuntu/d;}' file
+linux
+unix
+fedora
+debian
+
+Here $ indicates the last line. If you want to delete Nth line only if it contains a pattern, then in place of $ place the line number.
+
+Note: In all the above examples, the sed command prints the contents of the file on the unix or linux terminal by removing the lines. However the sed command does not remove the lines from the source file. To Remove the lines from the source file itself, use the -i option with sed command.
+> sed -i '1d' file
+
+If you dont wish to delete the lines from the original source file you can redirect the output of the sed command to another file.
+sed '1d' file > newfile
+
+Recommended Reading:
+Sed Command in Unix
+Replace String With Awk / Sed Command in Unix
+Grep Command in Unix
+Awk Command
+SSH Command in Unix
+
+If you like this article, then please share it or click on the google +1 button.
+
+
+TagsUnix
+You might likeShow more
+Split File Using Awk Command - Unix / Linux
+February 11, 2015
+Execute a Command at a given Time in Unix
+June 30, 2014
+Connect to Postgres Database in Unix Shell Script
+May 26, 2014
+14 Comments
+
+Unknown28 April, 2013 22:57
+Hello
+I want to print between two patterns say
+VDD_NETS and VCC_NETS.
+So I know I can used sed as something like this
+
+sed -n '/VDD_NETS/,/VCC_NETS/'p file.txt
+But What I want is if the 2nd pattern begins with a comment i.e. # then I want go to the line and search VCC_NETS and brint between those patterns.
+Any help is appreciated ...
+Only thing I wanted is ignore the commented line that contains the VCC_NETS..
+
+Sudhakar
+
+
+
+
+
+
+
+Reply
+
+Vijay Bhaskar28 April, 2013 23:13
+sed -n '/VDD_NETS/,/VCC_NETS/'p file.txt | grep -v '^#V'
+
+
+
+
+Unknown29 April, 2013 02:45
+Thank you Vijay Bhaskar for the reply.
+Actually I wanted to delete the commented lines say starting with
+# using sed only. not by using the grep -v command.
+
+The actual file.txt is as follows
+
+-----------------------------
+EM_RULE_SET_AVG EM_RULES
+VDD_NETS {
+HELLO HERE
+#some text }
+## Some text here }
+here }
+NUMBERE 100
+---------------------------
+So the final o/p should be
+--------------------------------
+EM_RULE_SET_AVG EM_RULES
+NUMBERE 100
+--------------------------------
+i.e. I want all the lines between VDD_NETS and "}" are deleted ignoring the commented lines which may contain "}"
+
+I am trying something like this
+
+sed '/VDD_NETS/,/[^#.*]}/d' file.txt
+But it is deleteing between VDD_NETS and the first "}" of commented line.
+I am saying in the metacharacter list not beginning with [^#.*]
+[^#.*] --> It says not beginning with # followed by any character..
+But some how it is not skipping the commented lines (#) until the first uncommented line containig "}"
+
+I hope you got what I am trying to do
+Thanks
+Sudhkar
+
+
+
+
+
+
+Reply
+
+Unknown26 October, 2013 20:48
+Hi, I tried to delete remove first line and last line from a flat file using the command
+sed '1d;$d' filename. But it only removed first line, not the last line. i did it on linux server using putty. Can somebody please advise me what I am missing.
+Thank you!
+
+Reply
+
+Vijay Bhaskar12 November, 2013 21:44
+I tried this on linux box and it is working. Please try it once.
+
+
+
+Anonymous12 March, 2014 00:16
+I have save the string into one parametrer - ab , so i want to delete the string from the file which is present in parameter ab.
+I have a file Test1.txt , so the data present in ab parameter should get deleted from the Test1.txt file. Can this be achievable ?
+
+Reply
+
+Vijay Bhaskar12 March, 2014 01:25
+Try that in shell script.
+
+
+Unknown21 June, 2014 23:30
+i want to delete 2nd LAST LINE IN A FILE
+
+Reply
+
+Unknown06 April, 2018 03:59
+please I'm new learner so if u don't mind send some basic scripts please
+
+Reply
+
+Arif Ashraf24 September, 2019 06:32
+I have a file like the folllwing one:
+
+GENE_Zm00001d028597_T001.exon1
+GENE_Zm00001d028620_T001.exon1
+GENE_Zm00001d028643_T001.exon1
+GENE_Zm00001d028655_T001.exon6
+GENE_Zm00001d028661_T001.exon3
+GENE_Zm00001d028687_T001.exon8
+GENE_Zm00001d028690_T002.exon3
+GENE_Zm00001d028691_T003.exon4
+........
+
+I want to remove "GENE_" and ".exon" from each line. I'm using Cygwin. Which command should I use?
+
+Reply
+
+Hassan14 February, 2020 02:35
+Use sed's substitute command:
+```
+sed -e 's/^GENE_//' -e 's/\.exon//' FILENAME
+```
+
+
+Unknown04 March, 2020 05:45
+Assuming this is a text file:
+
+cat filename | sed -e 's/GENE//' -e 's/.exon//' > new_file.txt
+
+If it's a list of directories, use:
+
+sed -e -i 's/GENE//' -e 's/.exon//' *
+
+Where this will remove the GENE and .exon from * (or everything) in the current directory
+
+
+vel24 October, 2019 09:40
+how to remove all the record in the file
+
+Reply
+
+gladykov10 March, 2020 02:32
+Please move info about `-i` switch to beggining of file :)
+
+Retrieved 20201027 https://www.folkstalk.com/2013/03/sed-remove-lines-file-unix-examples.html?m=1
