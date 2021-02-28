@@ -1,4 +1,4 @@
-#!/data/data/com.termux/files/usr/bin/bash
+#!/usr/bin/env bash
 
 export DIALOGOPTS="--clear --colors --no-collapse"
 export DIALOG_OK=0
