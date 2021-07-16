@@ -78,7 +78,7 @@ then
   echo "TRUE"
 else
   echo "FALSE"
-fi  
+fi
 
 echo
 

@@ -100,7 +100,7 @@ _ADDresolvconf_() {
 	}
 	_CHECKRESOLVE_() {
 		if [ -f etc/resolv.conf ]
-		then 
+		then
 			if ! grep 'nameserver 8.8.8.8' etc/resolv.conf 1>/dev/null
 			then
 				_ADDTORESOLVE_
@@ -777,10 +777,10 @@ _ADDpc_() {
 		\$SUDOCONF pacman --noconfirm --color=always -S base base-devel "\${@:2}"
 	elif [[ "\$1" = "ae" ]]
 	then
-		\$SUDOCONF pacman --noconfirm --color=always -S base base-devel emacs "\${@:2}" 
+		\$SUDOCONF pacman --noconfirm --color=always -S base base-devel emacs "\${@:2}"
 	elif [[ "\$1" = "a8" ]]
 	then
-		\$SUDOCONF pacman --noconfirm --color=always -S base base-devel emacs jdk8-openjdk "\${@:2}" 
+		\$SUDOCONF pacman --noconfirm --color=always -S base base-devel emacs jdk8-openjdk "\${@:2}"
 	else
 		\$SUDOCONF pacman --noconfirm --color=always -S "\$@"
 	fi

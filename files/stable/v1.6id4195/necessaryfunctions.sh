@@ -1,8 +1,8 @@
 #!/bin/env bash
 # Copyright 2017-2018 by SDRausty. All rights reserved.  🌎 🌍 🌏 🌐 🗺
 # Hosting https://sdrausty.github.io/TermuxArch courtesy https://pages.github.com
-# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.  
-# https://sdrausty.github.io/TermuxArch/README has information about this project. 
+# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.
+# https://sdrausty.github.io/TermuxArch/README has information about this project.
 ################################################################################
 
 LC_TYPE=( "LANG" "LANGUAGE" "LC_ADDRESS" "LC_COLLATE" "LC_CTYPE" "LC_IDENTIFICATION" "LC_MEASUREMENT" "LC_MESSAGES" "LC_MONETARY" "LC_NAME" "LC_NUMERIC" "LC_PAPER" "LC_TELEPHONE" "LC_TIME" )
@@ -14,12 +14,12 @@ _CALLSYSTEM() {
 	else
 		if [[ "$mirror" = "os.archlinuxarm.org" ]] || [[ "$mirror" = "mirror.archlinuxarm.org" ]]; then
 			until ftchstnd;do
-				ftchstnd ||: 
+				ftchstnd ||:
 				sleep 2
 				printf "\\n"
 				COUNTER=$((COUNTER + 1))
-				if [[ "$COUNTER" = 4 ]];then 
-					printmax 
+				if [[ "$COUNTER" = 4 ]];then
+					printmax
 					exit
 				fi
 			done
@@ -44,23 +44,23 @@ detectsystem() {
 	if [[ "$CPUABI" = "$CPUABI5" ]];then
 		armv5l
 	elif [[ "$CPUABI" = "$CPUABI7" ]];then
-		detectsystem2 
+		detectsystem2
 	elif [[ "$CPUABI" = "$CPUABI8" ]];then
 		aarch64
 	elif [[ "$CPUABI" = "$CPUABIX86" ]];then
-		i686 
+		i686
 	elif [[ "$CPUABI" = "$CPUABIX86_64" ]];then
 		x86_64
 	else
-		printmismatch 
+		printmismatch
 	fi
 }
 
 detectsystem2() {
 	if [[ "$(getprop ro.product.device)" == *_cheets ]];then
-		armv7lChrome 
+		armv7lChrome
 	else
-		armv7lAndroid  
+		armv7lAndroid
 	fi
 }
 
@@ -86,14 +86,14 @@ lkernid() {
 	fi
 }
 
-lkernid 
+lkernid
 
-mainblock() { 
-	namestartarch 
+mainblock() {
+	namestartarch
 	spaceinfo
 	_PREPINSTALLDIR
-	detectsystem 
-	wakeunlock 
+	detectsystem
+	wakeunlock
 	printfooter
 	"$installdir/$startbin" ||:
 	printstartbinusage
@@ -101,7 +101,7 @@ mainblock() {
 }
 
 makefinishsetup() {
-	binfnstp=finishsetup.sh  
+	binfnstp=finishsetup.sh
 	callfileheader root/bin/"$binfnstp"
 	cat >> root/bin/"$binfnstp" <<- EOM
 versionid="v1.6 id4195"
@@ -140,31 +140,31 @@ versionid="v1.6 id4195"
 	cat >> root/bin/"$binfnstp" <<- EOM
 	printf "\\n\\e[0;32m%s\\e[1;32m%s\\e[0;32m%s\\e[1;32m%s\\e[0;32m%s\\n\\n\\e[1;32m%s\\e[0;32m" "To generate locales in a preferred language, you can use " "Settings > Language & keyboard > Language " "in Android.  Then run " "${0##*/} r " "for a quick system refresh." "==> "
    	locale-gen ||:
-	printf "\\n\\e[1;34m%s  \\e[0m" "🕛 > 🕤 Arch Linux in Termux is installed and configured 📲 " 
+	printf "\\n\\e[1;34m%s  \\e[0m" "🕛 > 🕤 Arch Linux in Termux is installed and configured 📲 "
 	printf "\\e]2;%s\\007" " 🕛 > 🕤 Arch Linux in Termux is installed and configured 📲 "
 	EOM
-	chmod 770 root/bin/"$binfnstp" 
+	chmod 770 root/bin/"$binfnstp"
 }
 
 makesetupbin() {
-	callfileheader root/bin/setupbin.sh 
+	callfileheader root/bin/setupbin.sh
 	cat >> root/bin/setupbin.sh <<- EOM
 versionid="v1.6 id4195"
 	unset LD_PRELOAD
 	EOM
-	echo "$prootstmnt /root/bin/finishsetup.sh ||:" >> root/bin/setupbin.sh 
+	echo "$prootstmnt /root/bin/finishsetup.sh ||:" >> root/bin/setupbin.sh
 	chmod 700 root/bin/setupbin.sh
 }
 
 makestartbin() {
-	callfileheader "$startbin" 
+	callfileheader "$startbin"
 	cat >> "$startbin" <<- EOM
 versionid="v1.6 id4195"
 	unset LD_PRELOAD
 	declare -g ar2ar="\${@:2}"
 	declare -g ar3ar="\${@:3}"
-	printusage() { 
-	printf "\\n\\e[0;32mUsage:  \\e[1;32m$startbin \\e[0;32mStart Arch Linux as root.  This account should only be reserved for system administration.\\n\\n	\\e[1;32m$startbin command command \\e[0;32mRun Arch Linux command from Termux as root user.\\n\\n	\\e[1;32m$startbin login user \\e[0;32mLogin as user.  Use \\e[1;32maddauser user \\e[0;32mfirst to create a user and the user's home directory.\\n\\n	\\e[1;32m$startbin raw \\e[0;32mConstruct the \\e[1;32mstartarch \\e[0;32mproot statement.  For example \\e[1;32mstartarch raw su - user \\e[0;32mwill login to Arch Linux as user.  Use \\e[1;32maddauser user \\e[0;32mfirst to create a user and the user's home directory.\\n\\n	\\e[1;32m$startbin su user command \\e[0;32mLogin as user and execute command.  Use \\e[1;32maddauser user \\e[0;32mfirst to create a user and the user's home directory.\\n\\n\\e[0m"'\033]2; TermuxArch '$startbin' help 📲  \007' 
+	printusage() {
+	printf "\\n\\e[0;32mUsage:  \\e[1;32m$startbin \\e[0;32mStart Arch Linux as root.  This account should only be reserved for system administration.\\n\\n	\\e[1;32m$startbin command command \\e[0;32mRun Arch Linux command from Termux as root user.\\n\\n	\\e[1;32m$startbin login user \\e[0;32mLogin as user.  Use \\e[1;32maddauser user \\e[0;32mfirst to create a user and the user's home directory.\\n\\n	\\e[1;32m$startbin raw \\e[0;32mConstruct the \\e[1;32mstartarch \\e[0;32mproot statement.  For example \\e[1;32mstartarch raw su - user \\e[0;32mwill login to Arch Linux as user.  Use \\e[1;32maddauser user \\e[0;32mfirst to create a user and the user's home directory.\\n\\n	\\e[1;32m$startbin su user command \\e[0;32mLogin as user and execute command.  Use \\e[1;32maddauser user \\e[0;32mfirst to create a user and the user's home directory.\\n\\n\\e[0m"'\033]2; TermuxArch '$startbin' help 📲  \007'
 	}
 
 	# [] Default Arch Linux in Termux PRoot root login.
@@ -228,18 +228,18 @@ makesystem() {
 	_CALLSYSTEM
 	printmd5check
 	md5check
-	printcu 
+	printcu
 	rm -f "$installdir"/*.tar.gz "$installdir"/*.tar.gz.md5
-	printdone 
-	printconfigup 
-	touchupsys 
+	printdone
+	printconfigup
+	touchupsys
 }
 
 md5check() {
 	if "$PREFIX"/bin/applets/md5sum -c "$file".md5 1>/dev/null ; then
 		printmd5success
 		printf "\\e[0;32m"
-		preproot ## & spinner "Unpacking" "$file…" 
+		preproot ## & spinner "Unpacking" "$file…"
 	else
 		rm -f "$installdir"/*.tar.gz "$installdir"/*.tar.gz.md5
 		printmd5error
@@ -248,8 +248,8 @@ md5check() {
 
 _PREPROOTDIR() {
 	cd "$installdir"
-	mkdir -p etc 
-	mkdir -p var/binds 
+	mkdir -p etc
+	mkdir -p var/binds
 	mkdir -p root/bin
 	mkdir -p usr/bin
 }
@@ -260,13 +260,13 @@ _PREPINSTALLDIR() {
 	addREADME
 	addae
 	addauser
-	addbash_logout 
-	addbash_profile 
-	addbashrc 
+	addbash_logout
+	addbash_profile
+	addbashrc
 	addcdtd
 	addcdth
 	addcdtmp
-	addch 
+	addch
 	adddfa
 	addfbindexample
 	addbinds
@@ -281,25 +281,25 @@ _PREPINSTALLDIR() {
 	addmoto
 	addpc
 	addpci
-	addprofile 
-	addresolvconf 
-	addt 
+	addprofile
+	addresolvconf
+	addt
 	addtour
-	addtrim 
+	addtrim
 	addyt
-	addwe  
-	addv 
+	addwe
+	addv
 	makefinishsetup
-	makesetupbin 
-	makestartbin 
+	makesetupbin
+	makestartbin
 }
 
 preproot() {
 	if [[ "$(ls -al "$installdir"/*z | awk '{ print $5 }')" -gt 557799 ]] ; then
 		if [[ "$CPUABI" = "$CPUABIX86" ]] || [[ "$CPUABI" = "$CPUABIX86_64" ]];then
-	 		proot --link2symlink -0 bsdtar -xpf "$file" --strip-components 1  
+	 		proot --link2symlink -0 bsdtar -xpf "$file" --strip-components 1
 		else
-	 		proot --link2symlink -0 "$PREFIX"/bin/applets/tar -xpf "$file" 
+	 		proot --link2symlink -0 "$PREFIX"/bin/applets/tar -xpf "$file"
 		fi
 	else
 		printf "\\n\\n\\e[1;31m%s \\e[0;32m%s \\e[1;31m%s\\n\\n\\e[0m" "Download Exception!  Execute" "bash setupTermuxArch.sh $args" "again…"
@@ -316,7 +316,7 @@ runfinishsetup() {
 		sed -e "/$nmir/ s/^# *//" -i "$installdir"/etc/pacman.d/mirrorlist
 	else
 	if [[ "$ed" = "" ]];then
-		editors 
+		editors
 	fi
 	if [[ ! "$(sed 1q  "$installdir"/etc/pacman.d/mirrorlist)" = "# # # # # # # # # # # # # # # # # # # # # # # # # # #" ]];then
 		editfiles
@@ -337,19 +337,19 @@ _SETLANGUAGE() { # Uses system settings to set locale.
  	_LANGIN[5]="$(getprop ro.product.locale)"
 	_LANGIN[6]="$(getprop ro.product.locale.language)"
 	_LANGIN[7]="$(getprop ro.product.locale.region)"
-	touch "$installdir"/etc/locale.gen 
+	touch "$installdir"/etc/locale.gen
 	if [[ "$_LANGUAGE" != *_* ]];then
 		_LANGUAGE="${_LANGIN[0]:-unknown}_${_LANGIN[1]:-unknown}"
-	       	if ! grep "$_LANGUAGE" "$installdir"/etc/locale.gen 1>/dev/null ; then 
+	       	if ! grep "$_LANGUAGE" "$installdir"/etc/locale.gen 1>/dev/null ; then
 			_LANGUAGE="unknown"
-	       	fi 
-	fi 
+	       	fi
+	fi
  	if [[ "$_LANGUAGE" != *_* ]];then
  		_LANGUAGE="${_LANGIN[3]:-unknown}_${_LANGIN[2]:-unknown}"
- 	       	if ! grep "$_LANGUAGE" "$installdir"/etc/locale.gen 1>/dev/null ; then 
+ 	       	if ! grep "$_LANGUAGE" "$installdir"/etc/locale.gen 1>/dev/null ; then
  			_LANGUAGE="unknown"
- 	       	fi 
- 	fi 
+ 	       	fi
+ 	fi
 	for i in "${!_LANGIN[@]}"; do
 		if [[ "${_LANGIN[i]}" = *-* ]];then
  	 		_LANGUAGE="${_LANGIN[i]//-/_}"
@@ -358,23 +358,23 @@ _SETLANGUAGE() { # Uses system settings to set locale.
 	done
  	if [[ "$_LANGUAGE" != *_* ]];then
  		_LANGUAGE="${_LANGIN[6]:-unknown}_${_LANGIN[7]:-unknown}"
- 	       	if ! grep "$_LANGUAGE" "$installdir"/etc/locale.gen 1>/dev/null ; then 
+ 	       	if ! grep "$_LANGUAGE" "$installdir"/etc/locale.gen 1>/dev/null ; then
  			_LANGUAGE="unknown"
- 	       	fi 
- 	fi 
+ 	       	fi
+ 	fi
  	if [[ "$_LANGUAGE" != *_* ]];then
    		_LANGUAGE="en_US"
- 	fi 
+ 	fi
 	printf "\\n\\e[1;32m%s\\e[0;32m%s\\e[1;32m%s\\e[0;32m%s\\n" "Setting locales to: " "Language " ">> $_LANGUAGE << " "Region"
 }
 
 _SETLOCALE() { # Uses system settings to set locale.
 	FTIME="$(date +%F%H%M%S)"
-	echo "## File locale.conf generated by setupTermuxArch.sh at" ${FTIME//-}. > etc/locale.conf 
+	echo "## File locale.conf generated by setupTermuxArch.sh at" ${FTIME//-}. > etc/locale.conf
 	for i in "${!LC_TYPE[@]}"; do
-	 	echo "${LC_TYPE[i]}"="$_LANGUAGE".UTF-8 >> etc/locale.conf 
+	 	echo "${LC_TYPE[i]}"="$_LANGUAGE".UTF-8 >> etc/locale.conf
 	done
-	sed -i "/\\#$_LANGUAGE.UTF-8 UTF-8/{s/#//g;s/@/-at-/g;}" etc/locale.gen 
+	sed -i "/\\#$_LANGUAGE.UTF-8 UTF-8/{s/#//g;s/@/-at-/g;}" etc/locale.gen
 }
 
 touchupsys() {
@@ -382,19 +382,19 @@ touchupsys() {
 	_SETLOCALE
 	runfinishsetup
 	rm -f root/bin/finishsetup.sh
-	rm -f root/bin/setupbin.sh 
+	rm -f root/bin/setupbin.sh
 }
 
 wakelock() {
-	printwla 
+	printwla
 	am startservice --user 0 -a com.termux.service_wake_lock com.termux/com.termux.app.TermuxService > /dev/null
-	printdone 
+	printdone
 }
 
 wakeunlock() {
-	printwld 
+	printwld
 	am startservice --user 0 -a com.termux.service_wake_unlock com.termux/com.termux.app.TermuxService > /dev/null
-	printdone 
+	printdone
 }
 
 ## EOF

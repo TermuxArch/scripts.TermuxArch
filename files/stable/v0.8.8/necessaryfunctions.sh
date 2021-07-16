@@ -1,8 +1,8 @@
 #!/bin/bash -e
 # Copyright 2017-2018 by SDRausty. All rights reserved.  🌎 🌍 🌏 🌐 🗺
 # Hosting https://sdrausty.github.io/TermuxArch courtesy https://pages.github.com
-# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.  
-# https://sdrausty.github.io/TermuxArch/README has information about this project. 
+# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.
+# https://sdrausty.github.io/TermuxArch/README has information about this project.
 ################################################################################
 
 callsystem ()
@@ -37,44 +37,44 @@ detectsystem ()
 	if [ $(getprop ro.product.cpu.abi) = armeabi ];then
 		armv5l
 	elif [ $(getprop ro.product.cpu.abi) = armeabi-v7a ];then
-		detectsystem2 
+		detectsystem2
 	elif [ $(getprop ro.product.cpu.abi) = arm64-v8a ];then
 		aarch64
 	elif [ $(getprop ro.product.cpu.abi) = x86 ];then
-		i686 
+		i686
 	elif [ $(getprop ro.product.cpu.abi) = x86_64 ];then
 		x86_64
 	else
-		printmismatch 
+		printmismatch
 	fi
 }
 
 detectsystem2 ()
 {
 	if [[ $(getprop ro.product.device) == *_cheets ]];then
-		armv7lChrome 
+		armv7lChrome
 	else
-		armv7lAndroid  
+		armv7lAndroid
 	fi
 }
 
 mainblock ()
-{ 
+{
 	rmarchq
 	spaceinfoq
-	callsystem 
-	$HOME$rootdir/root/bin/setupbin.sh 
+	callsystem
+	$HOME$rootdir/root/bin/setupbin.sh
 	termux-wake-unlock
 	rm $HOME$rootdir/root/bin/setupbin.sh
 	printfooter
-	$HOME$rootdir/$bin 
+	$HOME$rootdir/$bin
 }
 
 makebin ()
 {
-	makestartbin 
-	printconfigq 
-	touchupsys 
+	makestartbin
+	printconfigq
+	touchupsys
 }
 
 makesetupbin ()
@@ -99,14 +99,14 @@ makestartbin ()
 
 makesystem ()
 {
-	printdownloading 
-	termux-wake-lock 
+	printdownloading
+	termux-wake-lock
 	printf "\033[0;32mDONE  \033[0m"
 	if [ $(getprop ro.product.cpu.abi) = x86 ] || [ $(getprop ro.product.cpu.abi) = x86_64 ];then
 		getimage
 	else
 		if [ "$mirror" = "os.archlinuxarm.org" ] || [ "$mirror" = "mirror.archlinuxarm.org" ]; then
-			ftchstnd 
+			ftchstnd
 		else
 			ftchit
 		fi
@@ -114,13 +114,13 @@ makesystem ()
 	printmd5check
 	if md5sum -c $file.md5 1>/dev/null ; then
 		printmd5success
-		preproot 
+		preproot
 	else
-		rmarchrm 
+		rmarchrm
 		printmd5error
 	fi
 	rm *.tar.gz *.tar.gz.md5
-	makebin 
+	makebin
 }
 
 preproot ()
@@ -128,11 +128,11 @@ preproot ()
 	if [ $(du $HOME$rootdir/*z | awk {'print $1'}) -gt 112233 ];then
 		if [ $(getprop ro.product.cpu.abi) = x86 ] || [ $(getprop ro.product.cpu.abi) = x86_64 ];then
 			#cd $HOME
-			#proot --link2symlink -0 $PREFIX/bin/applets/tar xf $HOME$rootdir$file 
+			#proot --link2symlink -0 $PREFIX/bin/applets/tar xf $HOME$rootdir$file
 			#cd $HOME$rootdir
-			proot --link2symlink -0 bsdtar -xpf $file --strip-components 1 
+			proot --link2symlink -0 bsdtar -xpf $file --strip-components 1
 		else
-			proot --link2symlink -0 $PREFIX/bin/applets/tar xf $file 
+			proot --link2symlink -0 $PREFIX/bin/applets/tar xf $file
 		fi
 	else
 		printf "\n\n\033[1;31mDownload Exception!  Execute \033[0;32mbash setupTermuxArch.sh\033[1;31m again.  Exiting…\n"'\033]2;  Thank you for using setupTermuxArch.sh.  Execute `bash setupTermuxArch.sh` again.\007'
@@ -143,10 +143,10 @@ preproot ()
 setlocalegen()
 {
 	if [ -e etc/locale.gen ]; then
-		sed -i '/\#en_US.UTF-8 UTF-8/{s/#//g;s/@/-at-/g;}' etc/locale.gen 
+		sed -i '/\#en_US.UTF-8 UTF-8/{s/#//g;s/@/-at-/g;}' etc/locale.gen
 	else
 		cat >  etc/locale.gen <<- EOM
-		en_US.UTF-8 UTF-8 
+		en_US.UTF-8 UTF-8
 		EOM
 	fi
 }
@@ -154,8 +154,8 @@ setlocalegen()
 touchupsys ()
 {
 	mkdir -p root/bin
-	addbash_profile 
-	addbashrc 
+	addbash_profile
+	addbashrc
 	adddfa
 	addga
 	addgcl
@@ -163,11 +163,11 @@ touchupsys ()
 	addgp
 	addgpl
 	addmotd
-	addprofile 
-	addresolvconf 
-	addt 
-	addyt 
-	addv 
+	addprofile
+	addresolvconf
+	addt
+	addyt
+	addv
 	setlocalegen
 	printf "\n\033[0;32m"
 	if [[ $ed = "" ]];then
@@ -190,6 +190,6 @@ touchupsys ()
 	done
 	$ed $HOME$rootdir/etc/pacman.d/mirrorlist
 	makefinishsetup
-	makesetupbin 
+	makesetupbin
 }
 

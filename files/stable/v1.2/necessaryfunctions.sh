@@ -1,8 +1,8 @@
 #!/bin/bash -e
 # Copyright 2017-2018 by SDRausty. All rights reserved.  🌎 🌍 🌏 🌐 🗺
 # Hosting https://sdrausty.github.io/TermuxArch courtesy https://pages.github.com
-# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.  
-# https://sdrausty.github.io/TermuxArch/README has information about this project. 
+# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.
+# https://sdrausty.github.io/TermuxArch/README has information about this project.
 ################################################################################
 
 callsystem ()
@@ -41,24 +41,24 @@ detectsystem ()
 	if [ $(getprop ro.product.cpu.abi) = armeabi ];then
 		armv5l
 	elif [ $(getprop ro.product.cpu.abi) = armeabi-v7a ];then
-		detectsystem2 
+		detectsystem2
 	elif [ $(getprop ro.product.cpu.abi) = arm64-v8a ];then
 		aarch64
 	elif [ $(getprop ro.product.cpu.abi) = x86 ];then
-		i686 
+		i686
 	elif [ $(getprop ro.product.cpu.abi) = x86_64 ];then
 		x86_64
 	else
-		printmismatch 
+		printmismatch
 	fi
 }
 
 detectsystem2 ()
 {
 	if [[ $(getprop ro.product.device) == *_cheets ]];then
-		armv7lChrome 
+		armv7lChrome
 	else
-		armv7lAndroid  
+		armv7lAndroid
 	fi
 }
 
@@ -107,32 +107,32 @@ lkernid ()
 lkernid
 
 mainblock ()
-{ 
+{
 	spaceinfoq
-	callsystem 
-	printwld 
+	callsystem
+	printwld
 	termux-wake-unlock
-	printdone 
+	printdone
 	printfooter
-	$HOME$rootdir/$bin 
+	$HOME$rootdir/$bin
 }
 
 makebin ()
 {
-	makestartbin 
-	printconfigq 
-	touchupsys 
+	makestartbin
+	printconfigq
+	touchupsys
 }
 
 makefinishsetup ()
 {
-	binfs=finishsetup.sh  
+	binfs=finishsetup.sh
 	cat > root/bin/$binfs <<- EOM
 	#!/bin/bash -e
 	# Copyright 2017-2018 by SDRausty. All rights reserved.  🌎 🌍 🌏 🌐 🗺
 	# Hosting https://sdrausty.github.io/TermuxArch courtesy https://pages.github.com
-	# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.  
-	# https://sdrausty.github.io/TermuxArch/README has information about this project. 
+	# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.
+	# https://sdrausty.github.io/TermuxArch/README has information about this project.
 	################################################################################
 	EOM
 	if [ -e $HOME/.bash_profile ]; then
@@ -155,10 +155,10 @@ makefinishsetup ()
 	done
 	if [ $(getprop ro.product.cpu.abi) = x86 ] || [ $(getprop ro.product.cpu.abi) = x86_64 ];then
 	if [ $(getprop ro.product.cpu.abi) = x86 ];then
-		pacman -Syu sed archlinux32-keyring-transition patch --noconfirm --color always ||: 
+		pacman -Syu sed archlinux32-keyring-transition patch --noconfirm --color always ||:
 		printf "\n\033[36m"
-		mv /usr/lib/gnupg/scdaemon{,_} 2>/dev/null ||: 
-		rm -rf /etc/pacman.d/gnupg ||: 
+		mv /usr/lib/gnupg/scdaemon{,_} 2>/dev/null ||:
+		rm -rf /etc/pacman.d/gnupg ||:
 		# This for loop generates entropy for \$t seconds.
 		for i in {1..4}; do
 			\$(nice -n 20 find / -type f -exec cat {} \\; >/dev/null 2>/dev/null & sleep \$t ; kill \$! 2>/dev/null) &
@@ -167,14 +167,14 @@ makefinishsetup ()
 			\$(nice -n 20 cat /dev/urandom >/dev/null & sleep \$t ; kill \$! 2>/dev/null) &
 		done
 		printf "\033[0;34mWhen \033[0;37mgpg: Generating pacman keyring master key\033[0;34m appears on the screen, the installation process can be accelerated.  The system desires a lot of entropy at this part of the install procedure.  To generate as much entropy as possible quickly, watch and listen to a file on your device.  \n\nThe program \033[1;32mpacman-key\033[0;34m will want as much entropy as possible when generating keys.  Entropy is also created through tapping, sliding, one, two and more fingers tapping with short and long taps.  When \033[0;37mgpg: Generating pacman keyring master key\033[0;34m appears on the screen, use any of these simple methods to accelerate the installation process if it is stalled.  Put even simpler, just do something on device.  Browsing files will create entropy on device.  Slowly swiveling the device in space and time will accelerate the installation process.  This method alone might not generate enough entropy (a measure of randomness in a closed system) for the process to complete quickly.  Use \033[1;32m.$rootdir/bin/ces \033[0;34min a new Termux session to generate and watch entropy on device.\n\n\033[m"
-		pacman-key --init ||: 
+		pacman-key --init ||:
 		printf "\n\033[0;34mWhen \033[1;37mAppending keys from archlinux.gpg\033[0;34m appears on the screen, the installation process can be accelerated.  The system desires a lot of entropy at this part of the install procedure.  To generate as much entropy as possible quickly, watch and listen to a file on your device.  \n\nThe program \033[1;32mpacman-key\033[0;34m will want as much entropy as possible when generating keys.  Entropy is also created through tapping, sliding, one, two and more fingers tapping with short and long taps.  When \033[1;37mAppending keys from archlinux.gpg\033[0;34m appears on the screen, use any of these simple methods to accelerate the installation process if it is stalled.  Put even simpler, just do something on device.  Browsing files will create entropy on device.  Slowly swiveling the device in space and time will accelerate the installation process.  This method alone might not generate enough entropy (a measure of randomness in a closed system) for the process to complete quickly.  Use \033[1;32m.$rootdir/bin/ces \033[0;34min a new Termux session to generate and watch entropy on device.\n\n"
-		pacman-key --populate archlinux ||: 
+		pacman-key --populate archlinux ||:
 	else
-		pacman -Syu sed archlinux-keyring patch --noconfirm --color always ||: 
+		pacman -Syu sed archlinux-keyring patch --noconfirm --color always ||:
 		printf "\n\033[36m"
-		mv /usr/lib/gnupg/scdaemon{,_} 2>/dev/null ||: 
-		rm -rf /etc/pacman.d/gnupg ||: 
+		mv /usr/lib/gnupg/scdaemon{,_} 2>/dev/null ||:
+		rm -rf /etc/pacman.d/gnupg ||:
 		# This for loop generates entropy for \$t seconds.
 		for i in {1..4}; do
 			\$(nice -n 20 find / -type f -exec cat {} \\; >/dev/null 2>/dev/null & sleep \$t ; kill \$! 2>/dev/null) &
@@ -183,15 +183,15 @@ makefinishsetup ()
 			\$(nice -n 20 cat /dev/urandom >/dev/null & sleep \$t ; kill \$! 2>/dev/null) &
 		done
 		printf "\033[0;34mWhen \033[0;37mgpg: Generating pacman keyring master key\033[0;34m appears on the screen, the installation process can be accelerated.  The system desires a lot of entropy at this part of the install procedure.  To generate as much entropy as possible quickly, watch and listen to a file on your device.  \n\nThe program \033[1;32mpacman-key\033[0;34m will want as much entropy as possible when generating keys.  Entropy is also created through tapping, sliding, one, two and more fingers tapping with short and long taps.  When \033[0;37mgpg: Generating pacman keyring master key\033[0;34m appears on the screen, use any of these simple methods to accelerate the installation process if it is stalled.  Put even simpler, just do something on device.  Browsing files will create entropy on device.  Slowly swiveling the device in space and time will accelerate the installation process.  This method alone might not generate enough entropy (a measure of randomness in a closed system) for the process to complete quickly.  Use \033[1;32m.$rootdir/bin/ces \033[0;34min a new Termux session to generate and watch entropy on device.\n\n\033[m"
-		pacman-key --init ||: 
+		pacman-key --init ||:
 		printf "\n\033[0;34mWhen \033[1;37mAppending keys from archlinux.gpg\033[0;34m appears on the screen, the installation process can be accelerated.  The system desires a lot of entropy at this part of the install procedure.  To generate as much entropy as possible quickly, watch and listen to a file on your device.  \n\nThe program \033[1;32mpacman-key\033[0;34m will want as much entropy as possible when generating keys.  Entropy is also created through tapping, sliding, one, two and more fingers tapping with short and long taps.  When \033[1;37mAppending keys from archlinux.gpg\033[0;34m appears on the screen, use any of these simple methods to accelerate the installation process if it is stalled.  Put even simpler, just do something on device.  Browsing files will create entropy on device.  Slowly swiveling the device in space and time will accelerate the installation process.  This method alone might not generate enough entropy (a measure of randomness in a closed system) for the process to complete quickly.  Use \033[1;32m.$rootdir/bin/ces \033[0;34min a new Termux session to generate and watch entropy on device.\n\n"
-		pacman-key --populate archlinux ||: 
+		pacman-key --populate archlinux ||:
 	fi
 	else
-		pacman -Syu archlinux-keyring patch --noconfirm --color always ||: 
+		pacman -Syu archlinux-keyring patch --noconfirm --color always ||:
 		printf "\n\033[36m"
-		mv /usr/lib/gnupg/scdaemon{,_} 2>/dev/null ||: 
-		rm -rf /etc/pacman.d/gnupg ||: 
+		mv /usr/lib/gnupg/scdaemon{,_} 2>/dev/null ||:
+		rm -rf /etc/pacman.d/gnupg ||:
 		# This for loop generates entropy for \$t seconds.
 		for i in {1..4}; do
 			\$(nice -n 20 find / -type f -exec cat {} \\; >/dev/null 2>/dev/null & sleep \$t ; kill \$! 2>/dev/null) &
@@ -200,22 +200,22 @@ makefinishsetup ()
 			\$(nice -n 20 cat /dev/urandom >/dev/null & sleep \$t ; kill \$! 2>/dev/null) &
 		done
 		printf "\033[0;34mWhen \033[0;37mgpg: Generating pacman keyring master key\033[0;34m appears on the screen, the installation process can be accelerated.  The system desires a lot of entropy at this part of the install procedure.  To generate as much entropy as possible quickly, watch and listen to a file on your device.  \n\nThe program \033[1;32mpacman-key\033[0;34m will want as much entropy as possible when generating keys.  Entropy is also created through tapping, sliding, one, two and more fingers tapping with short and long taps.  When \033[0;37mgpg: Generating pacman keyring master key\033[0;34m appears on the screen, use any of these simple methods to accelerate the installation process if it is stalled.  Put even simpler, just do something on device.  Browsing files will create entropy on device.  Slowly swiveling the device in space and time will accelerate the installation process.  This method alone might not generate enough entropy (a measure of randomness in a closed system) for the process to complete quickly.  Use \033[1;32m.$rootdir/bin/ces \033[0;34min a new Termux session to generate and watch entropy on device.\n\n\033[m"
-		pacman-key --init ||: 
+		pacman-key --init ||:
 		printf "\n\033[0;34mWhen \033[1;37mAppending keys from archlinux.gpg\033[0;34m appears on the screen, the installation process can be accelerated.  The system desires a lot of entropy at this part of the install procedure.  To generate as much entropy as possible quickly, watch and listen to a file on your device.  \n\nThe program \033[1;32mpacman-key\033[0;34m will want as much entropy as possible when generating keys.  Entropy is also created through tapping, sliding, one, two and more fingers tapping with short and long taps.  When \033[1;37mAppending keys from archlinux.gpg\033[0;34m appears on the screen, use any of these simple methods to accelerate the installation process if it is stalled.  Put even simpler, just do something on device.  Browsing files will create entropy on device.  Slowly swiveling the device in space and time will accelerate the installation process.  This method alone might not generate enough entropy (a measure of randomness in a closed system) for the process to complete quickly.  Use \033[1;32m.$rootdir/bin/ces \033[0;34min a new Termux session to generate and watch entropy on device.\n\n"
-		pacman-key --populate archlinux ||: 
+		pacman-key --populate archlinux ||:
 	fi
 	printf "\n\033[1;32m==> \033[0m"
 	locale-gen ||:
 	printf "\n\033[1;32m==> \033[1;37mPatching \033[1;32m/bin/makepkg\033[1;37m...\n\n\033[0m"
-	patch -n -i /root/bin/makepkg.diff -o makepkg /bin/makepkg ||: 
-	mv makepkg /bin/makepkg ||: 
-	rm /root/bin/makepkg.diff ||: 
+	patch -n -i /root/bin/makepkg.diff -o makepkg /bin/makepkg ||:
+	mv makepkg /bin/makepkg ||:
+	rm /root/bin/makepkg.diff ||:
 	printf "\n\033[1;32m==> \033[1;37mPatching \033[1;32m/bin/makepkg\033[1;37m: \033[1;32mDONE\n\n\033[1;32m==> \033[1;37mRunning \033[1;32mtzselect\033[1;37m...\n\n\033[1;34mAdd the \033[1;32mtzselect\033[1;34m output code to \033[1;32m.bash_profile\033[1;34m so the system time in Arch Linux for future sessions will be set correctly.\n\n\033[0m"
 	tzselect
 	printf "\n"
 	printf '\033]2; 🕛 > 🕤 Arch Linux in Termux is installed and configured 📲 \007'
 	EOM
-	chmod 770 root/bin/finishsetup.sh 
+	chmod 770 root/bin/finishsetup.sh
 }
 
 makesetupbin ()
@@ -224,18 +224,18 @@ makesetupbin ()
 	#!$PREFIX/bin/bash -e
 	# Copyright 2017-2018 by SDRausty. All rights reserved.  🌎 🌍 🌏 🌐 🗺
 	# Hosting https://sdrausty.github.io/TermuxArch courtesy https://pages.github.com
-	# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.  
-	# https://sdrausty.github.io/TermuxArch/README has information about this project. 
+	# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.
+	# https://sdrausty.github.io/TermuxArch/README has information about this project.
 	################################################################################
 	unset LD_PRELOAD
 	EOM
 	if [[ "$kid" -eq 1 ]]; then
 		cat >> root/bin/setupbin.sh <<- EOM
-		exec proot --kill-on-exit --kernel-release=4.14.15 --link2symlink -0 -r $HOME$rootdir/ -b /dev/ -b /sys/ -b /proc/ -b /storage/ -b $HOME -w $HOME /bin/env -i HOME=/root TERM="$TERM" $HOME$rootdir/root/bin/finishsetup.sh 
+		exec proot --kill-on-exit --kernel-release=4.14.15 --link2symlink -0 -r $HOME$rootdir/ -b /dev/ -b /sys/ -b /proc/ -b /storage/ -b $HOME -w $HOME /bin/env -i HOME=/root TERM="$TERM" $HOME$rootdir/root/bin/finishsetup.sh
 		EOM
 	else
 		cat >> root/bin/setupbin.sh <<- EOM
-		exec proot --kill-on-exit --link2symlink -0 -r $HOME$rootdir/ -b /dev/ -b /sys/ -b /proc/ -b /storage/ -b $HOME -w $HOME /bin/env -i HOME=/root TERM="$TERM" $HOME$rootdir/root/bin/finishsetup.sh 
+		exec proot --kill-on-exit --link2symlink -0 -r $HOME$rootdir/ -b /dev/ -b /sys/ -b /proc/ -b /storage/ -b $HOME -w $HOME /bin/env -i HOME=/root TERM="$TERM" $HOME$rootdir/root/bin/finishsetup.sh
 		EOM
 	fi
 	chmod 700 root/bin/setupbin.sh
@@ -247,8 +247,8 @@ makestartbin ()
 	#!$PREFIX/bin/bash -e
 	# Copyright 2017-2018 by SDRausty. All rights reserved.  🌎 🌍 🌏 🌐 🗺
 	# Hosting https://sdrausty.github.io/TermuxArch courtesy https://pages.github.com
-	# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.  
-	# https://sdrausty.github.io/TermuxArch/README has information about this project. 
+	# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.
+	# https://sdrausty.github.io/TermuxArch/README has information about this project.
 	################################################################################
 	unset LD_PRELOAD
 	EOM
@@ -296,14 +296,14 @@ makestartbin ()
 
 makesystem ()
 {
-	printwla 
-	termux-wake-lock 
-	printdone 
+	printwla
+	termux-wake-lock
+	printdone
 	if [ $(getprop ro.product.cpu.abi) = x86 ] || [ $(getprop ro.product.cpu.abi) = x86_64 ];then
 		getimage
 	else
 		if [ "$mirror" = "os.archlinuxarm.org" ] || [ "$mirror" = "mirror.archlinuxarm.org" ]; then
-			ftchstnd 
+			ftchstnd
 		else
 			ftchit
 		fi
@@ -311,15 +311,15 @@ makesystem ()
 	printmd5check
 	if md5sum -c $file.md5 1>/dev/null ; then
 		printmd5success
-		preproot 
+		preproot
 	else
-		rmarchrm 
+		rmarchrm
 		printmd5error
 	fi
-	printcu 
+	printcu
 	rm *.tar.gz *.tar.gz.md5
-	printdone 
-	makebin 
+	printdone
+	makebin
 }
 
 preproot ()
@@ -327,11 +327,11 @@ preproot ()
 	if [ $(du $HOME$rootdir/*z | awk {'print $1'}) -gt 112233 ];then
 		if [ $(getprop ro.product.cpu.abi) = x86 ] || [ $(getprop ro.product.cpu.abi) = x86_64 ];then
 			#cd $HOME
-			#proot --link2symlink -0 $PREFIX/bin/applets/tar xf $HOME$rootdir$file 
+			#proot --link2symlink -0 $PREFIX/bin/applets/tar xf $HOME$rootdir$file
 			#cd $HOME$rootdir
-			proot --link2symlink -0 bsdtar -xpf $file --strip-components 1 
+			proot --link2symlink -0 bsdtar -xpf $file --strip-components 1
 		else
-			proot --link2symlink -0 $PREFIX/bin/applets/tar xf $file 
+			proot --link2symlink -0 $PREFIX/bin/applets/tar xf $file
 		fi
 	else
 		printf "\n\n\033[1;31mDownload Exception!  Execute \033[0;32mbash setupTermuxArch.sh\033[1;31m again…\n"'\033]2;  Thank you for using setupTermuxArch.sh.  Execute `bash setupTermuxArch.sh` again…\007'
@@ -342,7 +342,7 @@ preproot ()
 runfinishsetup ()
 {
 	if [[ $ed = "" ]];then
-		editors 
+		editors
 	fi
 	if [[ $(sed 1q  $HOME$rootdir/etc/pacman.d/mirrorlist) = "# # # # # # # # # # # # # # # # # # # # # # # # # # #" ]];then
 		:
@@ -368,7 +368,7 @@ runfinishsetup ()
 	fi
 	done
 	printf "\n"
-	$HOME$rootdir/root/bin/setupbin.sh 
+	$HOME$rootdir/root/bin/setupbin.sh
 }
 
 runfinishsetupq ()
@@ -377,7 +377,7 @@ runfinishsetupq ()
 		printf "\n\033[0;32mWould you like to run \033[1;32mfinishsetup.sh\033[0;32m to complete the Arch Linux configuration and update now, or at a later time?  \033[1;32mNow is recommended.  \033[0;32m"
 		read -p "Answer yes to complete the Arch Linux configuration and update now; Or answer no for later [Y|n] " nl
 	if [[ $nl = [Yy]* ]] || [[ $nl = "" ]];then
-		runfinishsetup 
+		runfinishsetup
 		break
 	elif [[ $nl = [Nn]* ]];then
 		printf "\n\033[0;32mSet the geographically nearby mirror in \033[1;32m/etc/pacman.d/mirrorlist\033[0;32m first.  Then use \033[1;32m$HOME$rootdir/root/bin/setupbin.sh\033[0;32m in Termux to run \033[1;32mfinishsetup.sh\033[0;32m or simply \033[1;32mfinishsetup.sh\033[0;32m in Arch Linux Termux PRoot to complete the Arch Linux configuration and update."
@@ -394,17 +394,17 @@ runfinishsetupq ()
 setlocaleconf ()
 {
 	if ! grep en_US etc/locale.conf 2>/dev/null ; then
-		echo LANG=en_US.UTF-8 >> etc/locale.conf 
+		echo LANG=en_US.UTF-8 >> etc/locale.conf
 	fi
 }
 
 setlocalegen ()
 {
 	if [ -e etc/locale.gen ]; then
-		sed -i '/\#en_US.UTF-8 UTF-8/{s/#//g;s/@/-at-/g;}' etc/locale.gen 
+		sed -i '/\#en_US.UTF-8 UTF-8/{s/#//g;s/@/-at-/g;}' etc/locale.gen
 	else
 		cat >  etc/locale.gen <<- EOM
-		en_US.UTF-8 UTF-8 
+		en_US.UTF-8 UTF-8
 		EOM
 	fi
 }
@@ -416,9 +416,9 @@ touchupsys ()
 	addauser
 	addauserps
 	addauserpsc
-	addbash_profile 
-	addbashrc 
-	addce 
+	addbash_profile
+	addbashrc
+	addce
 	addces
 	adddfa
 	addga
@@ -428,18 +428,18 @@ touchupsys ()
 	addgpl
 	addmakepkgdiff
 	addmotd
-	addprofile 
-	addresolvconf 
-	addt 
+	addprofile
+	addresolvconf
+	addt
 	addtour
-	addyt 
-	addv 
+	addyt
+	addv
 	setlocalegen
-	setlocaleconf 
+	setlocaleconf
 	makefinishsetup
-	makesetupbin 
+	makesetupbin
 	runfinishsetup
 	rm root/bin/finishsetup.sh
-	rm root/bin/setupbin.sh 
+	rm root/bin/setupbin.sh
 }
 

@@ -46,7 +46,7 @@ do
   let "die1 = RANDOM % $PIPS"
   update_count $die1
   let "throw += 1"
-done  
+done
 
 print_result
 

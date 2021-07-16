@@ -522,14 +522,14 @@ _PSGI1ESTRING_() {	# print signal generated in arg 1 format
 _QEMU_ () {
 	_INST_() { # checks for neccessary commands
 	COMMS="$1"
-	COMMANDR="$(command -v au)" || (printf "%s\\n\\n" "$STRING1") 
+	COMMANDR="$(command -v au)" || (printf "%s\\n\\n" "$STRING1")
 	COMMANDIF="${COMMANDR##*/}"
 	STRING1="COMMAND \`au\` enables rollback, available at https://wae.github.io/au/ IS NOT FOUND: Continuing... "
 	STRING2="Cannot update ~/${0##*/} prerequisite: Continuing..."
 	PKG="$2"
 	_INPKGS_() {
 		if [ "$COMMANDIF" = au ]
-		then 
+		then
 			au "$PKG" || printf "%s\\n" "$STRING2"
 		else
 			apt install "$PKG" || printf "%s\\n" "$STRING2"
@@ -545,19 +545,19 @@ _QEMU_ () {
 	printf "%s\\n" "Please select the architecture by number from this list:"
 	select ARCHITECTURE in armeabi armeabi-v7a arm64-v8a x86 x86_64;
 	do
-		CPUABI="$ARCHITECTURE" 
+		CPUABI="$ARCHITECTURE"
 		if [[ "$ARCHITECTURE" == armeabi ]] || [[ "$ARCHITECTURE" == armeabi-v7a ]]
 		then
-			ARCHITEC="arm" 
-		elif [[ "$ARCHITECTURE" == arm64-v8a ]] 
+			ARCHITEC="arm"
+		elif [[ "$ARCHITECTURE" == arm64-v8a ]]
 		then
-			ARCHITEC="aarch64" 
-		elif [[ "$ARCHITECTURE" == x86 ]] 
+			ARCHITEC="aarch64"
+		elif [[ "$ARCHITECTURE" == x86 ]]
 		then
-			ARCHITEC="i386" 
-		elif [[ "$ARCHITECTURE" == x86_64 ]] 
+			ARCHITEC="i386"
+		elif [[ "$ARCHITECTURE" == x86_64 ]]
 		then
-			ARCHITEC="x86_64" 
+			ARCHITEC="x86_64"
 		fi
 		INCOMM="qemu-user-$ARCHITEC"
 		[[ $CPUABI == *arm* ]] || [[ $CPUABI == *86* ]] && printf "%s\\n" "You picked ($REPLY) $CPUABI.  The chosen architecture for installation is $CPUABI." && QEMUCR=0 && break || printf "%s\\n" "Please select the architecture by number."
@@ -816,7 +816,7 @@ then
 elif [[ "${1//-}" = [Oo]* ]]
 then
 	printf "\\nSetting mode to option.\\n"
-	EDO01LCR=0 
+	EDO01LCR=0
 	LCR="2"
 	printf "\\n\\e[0;32mSetting mode\\e[1;34m : \\e[1;32mminimal refresh with refresh user directories\\e[1;34m :\\e[0;32m For a full refresh you can use the%s \\e[1;32mbash '%s' \\e[0;32m%s\\e[1;34m...\\n\\e[0m" "" "${0##*/} ref[resh]" "command"
 	_ARG2DIR_ "$@"
@@ -889,7 +889,7 @@ fi
 ## USAGE[1]: 'setupTermuxArch wget sysinfo' will use wget as the download manager and produce a system information file in the working directory.  This can be abbreviated to 'setupTermuxArch ws' and 'setupTermuxArch w s'.
 ## USAGE[2]: 'setupTermuxArch wget manual customdir' will install the installation in customdir with wget and use manual mode during instalation.
 ## USAGE[3]: 'setupTermuxArch wget refresh customdir' will refresh this installation using wget as the download manager.
-## 
+##
 ## FACTS ABOUT THIS PROJECT:
 ## File 'pullTermuxArchSubmodules.bash' will execute 'git pull' and populate git repository modules, and file 'pullTermuxArchSubmodules.bash' can be run directly in a PRoot environment.  File pullTermuxArchSubmodules.bash's functions are not related to updating functions run by command 'setupTermuxArch r[e[fresh]]' that have completely different update functions.  The command 'setupTermuxArch r[e[fresh]]' attempts to refresh the Arch Linux in Termux PRoot installation and the TermuxArch generated scripts to the newest version.  It also helps in the installation and configuration process if everything did not go smoothly on the first try to install Arch Linux in Termux PRoot.
 ## Files 'setupTermuxArch{.bash,.sh}' are held for backward compatibility;  Please reference file 'setupTermuxArch' as the chosen install file if aid and assistance be through sharing insight about this Arch Linux in a Termux PRoot container project which can be used on a smartphone, smartTV, tablet, wearable and more.  File 'setupTermuxArch' is earmarked as the install file name for this project.

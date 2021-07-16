@@ -1,11 +1,11 @@
-#!/bin/sh 
+#!/bin/sh
 # Copyright 2017-2018 by SDRausty. All rights reserved.
 # Website for this project at https://sdrausty.github.io/TermuxArch
-# See https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank You 
+# See https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank You
 # `makedownload.sh` should be run in `TermuxArch/scripts/files/working`.
 #############################################################################
 
-cdir=${PWD##*/}        
+cdir=${PWD##*/}
 #cdir=${pwd |sed 's!.*/!!'}
 date=`date +%Y%m%d`
 ntime=`date +%N`
@@ -16,10 +16,10 @@ msg="Running v0.9.2 rev$ntime from branch master hosted at https://sdrausty.gith
 echo "printf \"$msg\""
 ms="		printf \"$msg\""
 
-sed -i "/Using/c\\$ms" setupTermuxArch.sh 
+sed -i "/Using/c\\$ms" setupTermuxArch.sh
 
 cp setupTermuxArch.sh ../../..
-ls -al setupTermuxArch.sh 
+ls -al setupTermuxArch.sh
 pwd
 sha512sum *sh > termuxarchchecksum.sha512
 cd ../../..
@@ -29,6 +29,6 @@ rm scripts/files/$cdir/termuxarchchecksum.sha512
 md5sum setupTermuxArch.tar.gz > setupTermuxArch.sha512
 pwd
 ls -al setupTermuxArch.sha512
-ls -al setupTermuxArch.sh 
-ls -al setupTermuxArch.tar.gz 
+ls -al setupTermuxArch.sh
+ls -al setupTermuxArch.tar.gz
 

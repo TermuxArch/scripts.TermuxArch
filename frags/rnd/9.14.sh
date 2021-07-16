@@ -1,6 +1,6 @@
 #!/bin/bash
 # random-between.sh
-# Random number between two specified values. 
+# Random number between two specified values.
 # Script by Bill Gradwohl, with minor modifications by the document author.
 # Corrections in lines 187 and 189 by Anthony Le Clezio.
 # Used with permission.
@@ -26,7 +26,7 @@ randomBetween() {
       echo -n "multiple specifies that the answer must be "
       echo     "a multiple of this value."
       echo    "    i.e. answer must be evenly divisible by this number."
-      echo    
+      echo
       echo    "If any value is missing, defaults area supplied as: 0 32767 1"
       echo -n "Successful completion returns 0, "
       echo     "unsuccessful completion returns"
@@ -49,7 +49,7 @@ randomBetween() {
    [ ${divisibleBy} -lt 0 ] && divisibleBy=$((0-divisibleBy))
 
    # Sanity check.
-   if [ $# -gt 3 -o ${divisibleBy} -eq 0 -o  ${min} -eq ${max} ]; then 
+   if [ $# -gt 3 -o ${divisibleBy} -eq 0 -o  ${min} -eq ${max} ]; then
       syntax
       return 1
    fi
@@ -64,7 +64,7 @@ randomBetween() {
 
    #  If min is itself not evenly divisible by $divisibleBy,
    #+ then fix the min to be within range.
-   if [ $((min/divisibleBy*divisibleBy)) -ne ${min} ]; then 
+   if [ $((min/divisibleBy*divisibleBy)) -ne ${min} ]; then
       if [ ${min} -lt 0 ]; then
          min=$((min/divisibleBy*divisibleBy))
       else
@@ -74,7 +74,7 @@ randomBetween() {
 
    #  If max is itself not evenly divisible by $divisibleBy,
    #+ then fix the max to be within range.
-   if [ $((max/divisibleBy*divisibleBy)) -ne ${max} ]; then 
+   if [ $((max/divisibleBy*divisibleBy)) -ne ${max} ]; then
       if [ ${max} -lt 0 ]; then
          max=$((((max/divisibleBy)-1)*divisibleBy))
       else
@@ -103,7 +103,7 @@ randomBetween() {
    #+ since max and min have already been switched around.
    [ ${spread} -lt 0 ] && spread=$((0-spread))
    let spread+=divisibleBy
-   randomBetweenAnswer=$(((RANDOM%spread)/divisibleBy*divisibleBy+min))   
+   randomBetweenAnswer=$(((RANDOM%spread)/divisibleBy*divisibleBy+min))
 
    return 0
 
@@ -128,7 +128,7 @@ divisibleBy=3
 declare -a answer
 minimum=${min}
 maximum=${max}
-   if [ $((minimum/divisibleBy*divisibleBy)) -ne ${minimum} ]; then 
+   if [ $((minimum/divisibleBy*divisibleBy)) -ne ${minimum} ]; then
       if [ ${minimum} -lt 0 ]; then
          minimum=$((minimum/divisibleBy*divisibleBy))
       else
@@ -140,7 +140,7 @@ maximum=${max}
    #  If max is itself not evenly divisible by $divisibleBy,
    #+ then fix the max to be within range.
 
-   if [ $((maximum/divisibleBy*divisibleBy)) -ne ${maximum} ]; then 
+   if [ $((maximum/divisibleBy*divisibleBy)) -ne ${maximum} ]; then
       if [ ${maximum} -lt 0 ]; then
          maximum=$((((maximum/divisibleBy)-1)*divisibleBy))
       else

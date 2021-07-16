@@ -1,1 +1,1 @@
-Various script fragments. 
+Various script fragments.

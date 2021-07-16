@@ -1,15 +1,15 @@
 #!/bin/env bash
 # Copyright 2017-2018 by SDRausty. All rights reserved.  🌎 🌍 🌏 🌐 🗺
 # Hosted sdrausty.github.io/TermuxArch courtesy https://pages.github.com
-# https://sdrausty.github.io/TermuxArch/README has info about this project. 
-# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.  
+# https://sdrausty.github.io/TermuxArch/README has info about this project.
+# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.
 # _STANDARD_="function name" && STANDARD="variable name" are under construction.
 # Printout statement subroutines for `setupTermuxArch.sh`.
 ################################################################################
 FLHDR0[1]="# Copyright 2017-2018 by SDRausty. All rights reserved.  🌎 🌍 🌏 🌐 🗺"
-FLHDR0[2]="# Hosting sdrausty.github.io/TermuxArch courtesy https://pages.github.com." 
+FLHDR0[2]="# Hosting sdrausty.github.io/TermuxArch courtesy https://pages.github.com."
 FLHDR0[3]="# https://sdrausty.github.io/TermuxArch/README has info about this project."
-FLHDR0[4]="# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help." 
+FLHDR0[4]="# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help."
 FLHDR1[5]="################################################################################"
 FLHDR1[7]="IFS=$'\\n\\t'"
 FLHDR1[8]="set -Eeuo pipefail"
@@ -59,7 +59,7 @@ TRAPS[2]="trap _TRPSIG_ HUP INT TERM"
 TRAPS[3]="trap _TRPQ_ QUIT"
 TRAPS[4]=" "
 
-_CFLHDR_() { #	Create file headers, and interests comments.  
+_CFLHDR_() { #	Create file headers, and interests comments.
   	if [[ -z "${2:-}" ]] ; then
 		printf "%s\\n" "${FLHDR0[@]}" > "$1"
 		printf "%s\\n" "${FLHDR1[@]}" >> "$1"
@@ -85,7 +85,7 @@ _PRINTCU_() {
 }
 
 _PRINTDETECTEDSYSTEM_() {
-	printf "\n\033[0;34m 🕛 > 🕝 \033[1;34mDetected $(uname -m) " 
+	printf "\n\033[0;34m 🕛 > 🕝 \033[1;34mDetected $(uname -m) "
 	if [[ "$(getprop ro.product.device)" == *_cheets ]];then
 		printf "Chromebook.\n\n\033[0m"
 	else
@@ -136,7 +136,7 @@ _PRINTMD5CHECK_() {
 
 _PRINTMD5ERROR_() {
 	printf "\n\033[07;1m\033[31;1m 🔆 WARNING md5sum mismatch! The download failed and was removed!\033[34;1m\033[30;1m  Run \`bash setupTermuxArch.sh\` again.  See \`bash setupTermuxArch.sh help\` to resolve md5sum errors.  This kind of error can go away, like magic.  Waiting before executing again is recommended.  There are many reasons for checksum errors.  Proxies are one explaination.  Mirroring and mirrors are another explaination for md5sum errors.  Interrupted download is one more reason.  If this keeps repeating, copy \`knownconfigurations.sh\` to \`setupTermuxArchConfigs.sh\` with preferred mirror.  After editing \`setupTermuxArchConfigs.sh\`, run \`bash setupTermuxArch.sh\` and \`setupTermuxArchConfigs.sh\` loads automaticaly from the same directory.  Change mirror to desired geographic location to resolve md5sum errors.\n\nUser configurable variables are in \`setupTermuxArchConfigs.sh\`.  Create this file from \`kownconfigurations.sh\` in the working directory.  Use \`bash setupTermuxArch.sh manual\` to create and edit \`setupTermuxArchConfigs.sh\`.\n\n	Run \`bash setupTermuxArch.sh\` again…\n\033[0;0m\n"'\033]2;  Thank you for using setupTermuxArch.sh.  Run `bash setupTermuxArch.sh` again…\007'
-	exit 
+	exit
 }
 
 _PRINTMD5SUCCESS_() {
@@ -146,7 +146,7 @@ _PRINTMD5SUCCESS_() {
 
 _PRINTMISMATCH_() {
 	printf "\n\033[07;1m\033[31;1m 🔆 WARNING: Unknown configuration!  Did not find an architecture and operating system match in\033[37;1m knownconfigurations.sh\033[31;1m!  \033[36;1mDetected $(uname -mo).  There still is hope.  Other images are available at http://mirror.archlinuxarm.org/os/ and https://www.archlinux.org/mirrors/ to see if any match might the device.  If you find a match, then please \033[37;1msubmit a pull request\033[36;1m at https://github.com/sdrausty/TermuxArch/pulls with script modifications.  Alternatively, \033[37;1msubmit a modification request\033[36;1m at https://github.com/sdrausty/TermuxArch/issues if you find a configuration match.  Include output from \033[37;1muname -mo\033[36;1m on the device in order to expand autodetection for \033[37;1msetupTermuxArch.sh\033[36;1m.  See https://sdrausty.github.io/docs/TermuxArch/Known_Configurations for more information.\n\n	\033[36;1mRun setupTermuxArch.sh again…\n\033[0m"'\033]2;  Thank you for using setupTermuxArch.sh.  Run `bash setupTermuxArch.sh` again…\007'
-	exit 
+	exit
 }
 
 _PRINTFOOTER_() {
@@ -166,6 +166,6 @@ printrootdirfunction() {
 	declare -g printrootdir
 	printrootdir="$(echo "${rootdir%/}" |sed 's#//*#/#g')"
 }
-printrootdirfunction 
+printrootdirfunction
 
 ## EOF

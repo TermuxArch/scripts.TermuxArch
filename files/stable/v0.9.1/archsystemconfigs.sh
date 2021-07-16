@@ -1,8 +1,8 @@
 #!/bin/bash -e
 # Copyright 2017-2018 by SDRausty. All rights reserved.  🌎 🌍 🌏 🌐 🗺
 # Hosting https://sdrausty.github.io/TermuxArch courtesy https://pages.github.com
-# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.  
-# https://sdrausty.github.io/TermuxArch/README has information about this project. 
+# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.
+# https://sdrausty.github.io/TermuxArch/README has information about this project.
 ################################################################################
 
 addauser ()
@@ -13,29 +13,29 @@ addauser ()
 	cp -r /root /home/\$1
 	su - \$1
 	EOM
-	chmod 770 root/bin/addauser 
+	chmod 770 root/bin/addauser
 }
 
 addauserps ()
 {
-	# Add Arch Linux user and create user login Termux startup script. 
+	# Add Arch Linux user and create user login Termux startup script.
 	cat > root/bin/addauserps <<- EOM
 	#!/bin/bash -e
 	useradd \$1
 	cp -r /root /home/\$1
 	su - \$1
 	EOM
-	echo "cat > $HOME/bin/startarchuser\$1 <<- EOM " >> root/bin/addauserps 
+	echo "cat > $HOME/bin/startarchuser\$1 <<- EOM " >> root/bin/addauserps
 	cat >> root/bin/addauserps <<- EOM
 	#!/bin/bash -e
 	unset LD_PRELOAD
 	exec proot --link2symlink -0 -r $HOME$rootdir/ -b /dev/ -b /sys/ -b /proc/ -b /storage/ -b $HOME -w $HOME /bin/env -i HOME=/root TERM="$TERM" PS1='[termux@arch \W]\$ ' LANG=$LANG PATH=/bin:/usr/bin:/sbin:/usr/sbin /bin/su - \$1 --login
 	EOM
-	echo EOM >> root/bin/addauserps 
+	echo EOM >> root/bin/addauserps
 	cat >> root/bin/addauserps <<- EOM
 	chmod 770 $HOME/bin/startarchuser\$1
 	EOM
-	chmod 770 root/bin/addauserps 
+	chmod 770 root/bin/addauserps
 }
 
 addbash_profile ()
@@ -86,7 +86,7 @@ adddfa ()
 	usrspace=\`df 2>/dev/null | grep "/data" | awk {'print \$4'}\`
 	printf "\033[0;33m\$usrspace \$units of free user space is available on this device.\n\033[0m"
 	EOM
-	chmod 770 root/bin/dfa 
+	chmod 770 root/bin/dfa
 }
 
 addprofile ()
@@ -110,7 +110,7 @@ addga ()
 		git add .
 	fi
 	EOM
-	chmod 770 root/bin/ga 
+	chmod 770 root/bin/ga
 }
 
 addgcl ()
@@ -124,7 +124,7 @@ addgcl ()
 		git clone \$@
 	fi
 	EOM
-	chmod 770 root/bin/gcl 
+	chmod 770 root/bin/gcl
 }
 
 addgcm ()
@@ -138,7 +138,7 @@ addgcm ()
 		git commit
 	fi
 	EOM
-	chmod 770 root/bin/gcm 
+	chmod 770 root/bin/gcm
 }
 
 addgpl ()
@@ -152,7 +152,7 @@ addgpl ()
 		git pull
 	fi
 	EOM
-	chmod 770 root/bin/gpl 
+	chmod 770 root/bin/gpl
 }
 
 addgp ()
@@ -167,7 +167,7 @@ addgp ()
 		git push
 	fi
 	EOM
-	chmod 700 root/bin/gp 
+	chmod 700 root/bin/gp
 }
 
 addmotd ()
@@ -206,7 +206,7 @@ addt ()
 		tree \$@
 	fi
 	EOM
-	chmod 770 root/bin/t 
+	chmod 770 root/bin/t
 }
 
 addv ()
@@ -220,7 +220,7 @@ addv ()
 		vim \$@
 	fi
 	EOM
-	chmod 770 root/bin/v 
+	chmod 770 root/bin/v
 }
 
 addyt ()
@@ -235,6 +235,6 @@ addyt ()
 		youtube-dl \$@
 	fi
 	EOM
-	chmod 770 root/bin/yt 
+	chmod 770 root/bin/yt
 }
 

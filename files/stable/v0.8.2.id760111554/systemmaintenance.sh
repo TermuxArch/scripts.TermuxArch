@@ -1,8 +1,8 @@
 #!/bin/bash -e
 # Copyright 2017-2018 by SDRausty. All rights reserved.  🌎 🌍 🌏 🌐 🗺
 # Hosting https://sdrausty.github.io/TermuxArch courtesy https://pages.github.com
-# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.  
-# https://sdrausty.github.io/TermuxArch/README has information about this project. 
+# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.
+# https://sdrausty.github.io/TermuxArch/README has information about this project.
 ################################################################################
 
 sysinfo ()
@@ -10,9 +10,9 @@ sysinfo ()
 	spaceinfo
 	printf "\n\033[1;32m"
 	printf "Begin setupTermuxArch debug information.\n" > setupTermuxArchdebug$ntime.log
-	printf "\nDisk report $usrspace on /data `date`\n\n" >> setupTermuxArchdebug$ntime.log 
-	for n in 0 1 2 3 4 5 
-	do 
+	printf "\nDisk report $usrspace on /data `date`\n\n" >> setupTermuxArchdebug$ntime.log
+	for n in 0 1 2 3 4 5
+	do
 		echo "BASH_VERSINFO[$n] = ${BASH_VERSINFO[$n]}"  >> setupTermuxArchdebug$ntime.log
 	done
 	printf "\ncat /proc/cpuinfo results:\n\n" >> setupTermuxArchdebug$ntime.log
@@ -26,7 +26,7 @@ sysinfo ()
 	printf "\nDownload directory information results.\n\n" >> setupTermuxArchdebug$ntime.log
 	ls -al ~/storage/downloads  2>>setupTermuxArchdebug$ntime.log >> setupTermuxArchdebug$ntime.log 2>/dev/null ||:
 	ls -al ~/downloads 2>>setupTermuxArchdebug$ntime.log  >> setupTermuxArchdebug$ntime.log 2>/dev/null ||:
-	if [ -d /sdcard/Download ]; then echo "/sdcard/Download exists"; else echo "/sdcard/Download not found"; fi >> setupTermuxArchdebug$ntime.log 
+	if [ -d /sdcard/Download ]; then echo "/sdcard/Download exists"; else echo "/sdcard/Download not found"; fi >> setupTermuxArchdebug$ntime.log
 	if [ -d /storage/emulated/0/Download ]; then echo "/storage/emulated/0/Download exists"; else echo "/storage/emulated/0/Download not found"; fi >> setupTermuxArchdebug$ntime.log
 	printf "\ndu -hs $HOME/arch results:\n\n" >> setupTermuxArchdebug$ntime.log
 	du -hs $HOME/arch >> setupTermuxArchdebug$ntime.log

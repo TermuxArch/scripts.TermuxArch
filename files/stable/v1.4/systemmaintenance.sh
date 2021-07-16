@@ -1,8 +1,8 @@
 #!/bin/bash -e
 # Copyright 2017-2018 by SDRausty. All rights reserved.  🌎 🌍 🌏 🌐 🗺
 # Hosting https://sdrausty.github.io/TermuxArch courtesy https://pages.github.com
-# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.  
-# https://sdrausty.github.io/TermuxArch/README has information about this project. 
+# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.
+# https://sdrausty.github.io/TermuxArch/README has information about this project.
 ################################################################################
 
 echoSpecialParameters ()
@@ -37,9 +37,9 @@ sysinfo ()
 	printf "Begin setupTermuxArch debug information.\n" > setupTermuxArchDebug$stime.log
 	printf "\n\`termux-info\` results:\n\n" >> setupTermuxArchDebug$stime.log
 	termux-info >> setupTermuxArchDebug$stime.log
-	printf "\nDisk report $usrspace on /data `date`\n\n" >> setupTermuxArchDebug$stime.log 
-	for n in 0 1 2 3 4 5 
-	do 
+	printf "\nDisk report $usrspace on /data `date`\n\n" >> setupTermuxArchDebug$stime.log
+	for n in 0 1 2 3 4 5
+	do
 		echo "BASH_VERSINFO[$n] = ${BASH_VERSINFO[$n]}"  >> setupTermuxArchDebug$stime.log
 	done
 	printf "\ncat /proc/cpuinfo results:\n\n" >> setupTermuxArchDebug$stime.log
@@ -53,7 +53,7 @@ sysinfo ()
 	printf "\nDownload directory information results.\n\n" >> setupTermuxArchDebug$stime.log
 	ls -al ~/storage/downloads  2>>setupTermuxArchDebug$stime.log >> setupTermuxArchDebug$stime.log 2>/dev/null ||:
 	ls -al ~/downloads 2>>setupTermuxArchDebug$stime.log  >> setupTermuxArchDebug$stime.log 2>/dev/null ||:
-	if [ -d /sdcard/Download ]; then echo "/sdcard/Download exists"; else echo "/sdcard/Download not found"; fi >> setupTermuxArchDebug$stime.log 
+	if [ -d /sdcard/Download ]; then echo "/sdcard/Download exists"; else echo "/sdcard/Download not found"; fi >> setupTermuxArchDebug$stime.log
 	if [ -d /storage/emulated/0/Download ]; then echo "/storage/emulated/0/Download exists"; else echo "/storage/emulated/0/Download not found"; fi >> setupTermuxArchDebug$stime.log
 	printf "\ndu -hs $installdir results:\n\n" >> setupTermuxArchDebug$stime.log
 	du -hs $installdir >> setupTermuxArchDebug$stime.log 2>/dev/null ||:
@@ -71,18 +71,18 @@ refreshsys ()
 	printf '\033]2;  Thank you for using `bash setupTermuxArch.sh refresh`  🏁 \007'
 	if [ ! -d $installdir ] || [ ! -f $installdir/bin/we ];then
 		printf "\n\033[30mThe root directory structure is incorrect.  Refusing to continue \033[33mbash setupTermuxArch.sh refresh\033[30m.\033[0m\n"
-		printtail 
+		printtail
 	else
 		cd $installdir
 	fi
-	makestartbin 
+	makestartbin
 	addae
 	addauser
 	addauserps
 	addauserpsc
-	addbash_profile 
-	addbashrc 
-	addce 
+	addbash_profile
+	addbashrc
+	addce
 	addces
 	adddfa
 	addga
@@ -91,35 +91,35 @@ refreshsys ()
 	addgp
 	addgpl
 	addmotd
-	addprofile 
-	addresolvconf 
-	addt 
+	addprofile
+	addresolvconf
+	addt
 	addtour
-	addyt 
-	addwe  
-	addv 
+	addyt
+	addwe
+	addv
 	setlocalegen
 	makefinishsetup
-	makesetupbin 
-	printf "\n" 
-	printwla 
-	termux-wake-lock 
-	printdone 
+	makesetupbin
+	printf "\n"
+	printwla
+	termux-wake-lock
+	printdone
 	printf '\033]2;  Thank you for using `bash setupTermuxArch.sh refresh`  🏁 \007'
-	$installdir/root/bin/setupbin.sh 
+	$installdir/root/bin/setupbin.sh
 	printconfigq
 	rm root/bin/finishsetup.sh
-	rm root/bin/setupbin.sh 
+	rm root/bin/setupbin.sh
 	printf "\033[1;34m  The following files have been updated to the newest version.\n\n\033[0m"
 	ls $installdir/bin/ces |cut -f7- -d /
 	ls $installdir/$bin |cut -f7- -d /
 	ls $installdir/root/bin/* |cut -f7- -d /
-	printf "\n" 
-	printwld 
+	printf "\n"
+	printwld
 	termux-wake-unlock
-	printdone 
-	printfooter 
-	$installdir/$bin 
+	printdone
+	printfooter
+	$installdir/$bin
 	printfooter2
 	printtail
 }

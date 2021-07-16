@@ -1,14 +1,14 @@
 #!/bin/bash -e
 # Copyright 2017-2018 by SDRausty. All rights reserved.  🌎 🌍 🌏 🌐 🗺
 # Hosting https://sdrausty.github.io/TermuxArch courtesy https://pages.github.com
-# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.  
-# https://sdrausty.github.io/TermuxArch/README has information about this project. 
+# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.
+# https://sdrausty.github.io/TermuxArch/README has information about this project.
 ################################################################################
 
 adjustmd5file ()
 {
 	if [ $(getprop ro.product.cpu.abi) = x86_64 ] || [ $(getprop ro.product.cpu.abi) = x86 ];then
-		if [[ $dm = wget ]];then 
+		if [[ $dm = wget ]];then
 			wget -q -N --show-progress http://$mirror${path}md5sums.txt
 		else
 			curl -q --fail --retry 4 -O -L http://$mirror${path}md5sums.txt
@@ -17,8 +17,8 @@ adjustmd5file ()
 		sed '2q;d' md5sums.txt > $filename.md5
 		rm md5sums.txt
 	else
-		if [[ $dm = wget ]];then 
-			wget -N --show-progress http://$mirror$path$file.md5 
+		if [[ $dm = wget ]];then
+			wget -N --show-progress http://$mirror$path$file.md5
 		else
 			curl -q --fail --retry 4 -O -L http://$mirror$path$file.md5
 		fi
@@ -32,24 +32,24 @@ detectsystem ()
 	if [ $(getprop ro.product.cpu.abi) = armeabi ];then
 		armv5l
 	elif [ $(getprop ro.product.cpu.abi) = armeabi-v7a ];then
-		detectsystem2 
+		detectsystem2
 	elif [ $(getprop ro.product.cpu.abi) = arm64-v8a ];then
 		aarch64
 	elif [ $(getprop ro.product.cpu.abi) = x86 ];then
-		i686 
+		i686
 	elif [ $(getprop ro.product.cpu.abi) = x86_64 ];then
 		x86_64
 	else
-		printmismatch 
+		printmismatch
 	fi
 }
 
 detectsystem2 ()
 {
 	if [[ $(getprop ro.product.device) == *_cheets ]];then
-		armv7lChrome 
+		armv7lChrome
 	else
-		armv7lAndroid  
+		armv7lAndroid
 	fi
 }
 
@@ -64,9 +64,9 @@ detectsystem2p ()
 
 ftchstnd ()
 {
-		if [[ $dm = wget ]];then 
-			wget -N --show-progress http://$mirror$path$file.md5 
-			wget -q -c --show-progress http://$mirror$path$file 
+		if [[ $dm = wget ]];then
+			wget -N --show-progress http://$mirror$path$file.md5
+			wget -q -c --show-progress http://$mirror$path$file
 		else
 			curl -q -L --fail --retry 4 -O http://$mirror$path$file.md5 -O http://$mirror$path$file
 		fi
@@ -75,8 +75,8 @@ ftchstnd ()
 getimage ()
 {
 	if [ $(getprop ro.product.cpu.abi) = x86_64 ];then
-		if [[ $dm = wget ]];then 
-			# Get latest image for x86_64 via `wget` wants refinement.  Continue is not implemented. 
+		if [[ $dm = wget ]];then
+			# Get latest image for x86_64 via `wget` wants refinement.  Continue is not implemented.
 			wget -A tar.gz -m -nd -np http://$mirror$path
 		else
 			# The `curl` self-updating code is unknown at present.
@@ -84,8 +84,8 @@ getimage ()
 			wget -A tar.gz -m -nd -np http://$mirror$path
 		fi
 	else
-		if [[ $dm = wget ]];then 
-			wget -q -c --show-progress http://$mirror$path$file 
+		if [[ $dm = wget ]];then
+			wget -q -c --show-progress http://$mirror$path$file
 		else
 			curl -q -C - --fail --retry 4 -O -L http://$mirror$path$file
 		fi
@@ -94,8 +94,8 @@ getimage ()
 
 makesystem ()
 {
-	printdownloading 
-	termux-wake-lock 
+	printdownloading
+	termux-wake-lock
 	if [[ $(getprop ro.product.cpu.abi) -ne x86_64 ]] || [[ $(getprop ro.product.cpu.abi) -ne x86 ]];then
 		ftchstnd
 	else
@@ -105,13 +105,13 @@ makesystem ()
 	printmd5check
 	if md5sum -c $file.md5 ; then
 		printmd5success
-		preproot 
+		preproot
 	else
 		rm -rf $HOME/arch
 		printmd5error
 	fi
 	rm *.tar.gz *.tar.gz.md5
-	makebin 
+	makebin
 }
 
 preproot ()

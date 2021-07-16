@@ -1,8 +1,8 @@
 #!/bin/bash -e
 # Copyright 2017-2018 by SDRausty. All rights reserved.  🌎 🌍 🌏 🌐 🗺
 # Hosting https://sdrausty.github.io/TermuxArch courtesy https://pages.github.com
-# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.  
-# https://sdrausty.github.io/TermuxArch/README has information about this project. 
+# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.
+# https://sdrausty.github.io/TermuxArch/README has information about this project.
 ################################################################################
 
 addbash_profile ()
@@ -78,7 +78,7 @@ addga ()
 		git add .
 	fi
 	EOM
-	chmod 770 root/bin/ga 
+	chmod 770 root/bin/ga
 }
 
 addgcl ()
@@ -92,7 +92,7 @@ addgcl ()
 		git clone \$@
 	fi
 	EOM
-	chmod 770 root/bin/gcl 
+	chmod 770 root/bin/gcl
 }
 
 addgcm ()
@@ -106,7 +106,7 @@ addgcm ()
 		git commit
 	fi
 	EOM
-	chmod 770 root/bin/gcm 
+	chmod 770 root/bin/gcm
 }
 
 addgpl ()
@@ -120,7 +120,7 @@ addgpl ()
 		git pull
 	fi
 	EOM
-	chmod 770 root/bin/gpl 
+	chmod 770 root/bin/gpl
 }
 
 addgp ()
@@ -135,7 +135,7 @@ addgp ()
 		git push
 	fi
 	EOM
-	chmod 700 root/bin/gp 
+	chmod 700 root/bin/gp
 }
 
 addmotd ()
@@ -156,7 +156,7 @@ addmotd ()
 
 adtauser ()
 {
-	# add default Arch Termux user 
+	# add default Arch Termux user
 	cat > root/bin/adtauser <<- EOM
 	useradd user
 	cp -r /root /home/user
@@ -184,7 +184,7 @@ addt ()
 		tree \$@
 	fi
 	EOM
-	chmod 770 root/bin/t 
+	chmod 770 root/bin/t
 }
 
 addv ()
@@ -193,7 +193,7 @@ addv ()
 	#!/bin/bash -e
 	vim \$@
 	EOM
-	chmod 770 root/bin/v 
+	chmod 770 root/bin/v
 }
 
 addyt ()
@@ -208,12 +208,12 @@ addyt ()
 		youtube-dl \$@
 	fi
 	EOM
-	chmod 770 root/bin/yt 
+	chmod 770 root/bin/yt
 }
 
 makefinishsetup ()
 {
-	binfs=finishsetup.sh  
+	binfs=finishsetup.sh
 	cat > root/bin/$binfs <<- EOM
 	#!/bin/bash -e
 	EOM
@@ -242,6 +242,6 @@ makefinishsetup ()
 	printf '\033]2; 🕛 > 🕙 Arch Linux in Termux is installed and configured.  📲  \007'
 	rm \$HOME/bin/finishsetup.sh 2>/dev/null ||:
 	EOM
-	chmod 770 root/bin/finishsetup.sh 
+	chmod 770 root/bin/finishsetup.sh
 }
 

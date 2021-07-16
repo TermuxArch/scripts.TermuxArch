@@ -1,8 +1,8 @@
 #!/bin/bash -e
 # Copyright 2017-2018 by SDRausty. All rights reserved.  🌎 🌍 🌏 🌐 🗺
 # Hosting https://sdrausty.github.io/TermuxArch courtesy https://pages.github.com
-# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.  
-# https://sdrausty.github.io/TermuxArch/README has information about this project. 
+# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.
+# https://sdrausty.github.io/TermuxArch/README has information about this project.
 ################################################################################
 
 bloom ()
@@ -13,10 +13,10 @@ bloom ()
 chk ()
 {
 	if md5sum -c termuxarchchecksum.md5 1>/dev/null ; then
-		chkself 
+		chkself
 		if [[ $opt = manual ]];then
 			manual
-		else 
+		else
 			ldconf
 		fi
 		. archsystemconfigs.sh
@@ -24,12 +24,12 @@ chk ()
 		. necessaryfunctions.sh
 		. printoutstatements.sh
 		. systemmaintenance.sh
-		rmdsc 
+		rmdsc
 		printf "\n\033[36;1m 🕑 < 🕛 \033[1;34mTermuxArch "
 		printf "v0.8 id243891638"
 		printf " integrity: \033[36;1mOK\n\033[1;30m"
 	else
-		rmdsc 
+		rmdsc
 		printmd5syschker
 	fi
 }
@@ -39,9 +39,9 @@ chkdwn ()
 	if md5sum -c setupTermuxArch.md5 1>/dev/null ; then
 		printf "\033[36;1m 🕐 < 🕛 \033[1;34mTermuxArch downloaded: \033[36;1mOK\n\033[36;1m"
 		bsdtar -xf setupTermuxArch.tar.gz
-		rmds 
+		rmds
 	else
-		rmds 
+		rmds
 		printmd5syschker
 	fi
 }
@@ -62,7 +62,7 @@ depends ()
 	if [ ! -e $PREFIX/bin/bsdtar ] || [ ! -e $PREFIX/bin/curl ] || [ ! -e $PREFIX/bin/proot ] || [ ! -e $PREFIX/bin/wget ] ; then
 		printf "\033[1;34mChecking prerequisites and upgrading Termux.\n\n\033[36;1m"
 		apt-get update && apt-get upgrade -y
-		apt-get install bsdtar curl proot wget --yes 
+		apt-get install bsdtar curl proot wget --yes
 		printf "\n"
 	fi
 	if [ ! -e $PREFIX/bin/bsdtar ] || [ ! -e $PREFIX/bin/curl ] || [ ! -e $PREFIX/bin/proot ] || [ ! -e $PREFIX/bin/wget ] ; then
@@ -74,7 +74,7 @@ depends ()
 
 dependsblock ()
 {
-	depends 
+	depends
 	dwnl
 	if [ -f "setupTermuxArch.sh" ];then
 	cp setupTermuxArch.sh setupTermuxArch.tmp
@@ -86,7 +86,7 @@ dependsblock ()
 dwnl ()
 {
 	if [[ $dm = wget ]];then
-		wget -q -N --show-progress https://raw.githubusercontent.com/sdrausty/TermuxArch/master$dfl/setupTermuxArch.md5 
+		wget -q -N --show-progress https://raw.githubusercontent.com/sdrausty/TermuxArch/master$dfl/setupTermuxArch.md5
 		wget -q -N --show-progress https://raw.githubusercontent.com/sdrausty/TermuxArch/master$dfl/setupTermuxArch.tar.gz
 		printf "\n"
 	else
@@ -102,7 +102,7 @@ edq ()
 	read -p "Do you want to use \`nano\` or \`vi\` to edit your Arch Linux configuration files [n|v]? "  nv
 	if [[ $nv = [Nn]* ]];then
 		ed=nano
-		apt-get -qq install nano --yes 
+		apt-get -qq install nano --yes
 		break
 	elif [[ $nv = [Vv]* ]];then
 		ed=vi
@@ -122,7 +122,7 @@ intro ()
 	rmarchq
 	spaceinfoq
 	printf "\n\033[36;1m 🕛 < 🕛 \033[1;34mTermuxArch will attempt to install Linux in Termux.  Arch Linux will be available upon successful completion.  Ensure background data is not restricted.  If you do not see one o'clock 🕐 below, check the wireless connection.  Run \033[36mbash setupTermuxArch.sh --help \033[34;1mfor additional information.  "
-	dependsblock 
+	dependsblock
 }
 
 introdebug ()
@@ -130,7 +130,7 @@ introdebug ()
 	printf '\033]2;  Thank you for using `bash setupTermuxArch.sh` 📲 \007'
 	spaceinfo
 	printf "\n\033[36;1m 🕛 < 🕛 \033[1;34mTermuxArch will create a system information file.  Ensure background data is not restricted.  If you do not see one o'clock 🕐 below, check the wireless connection.  Run \033[36mbash setupTermuxArch.sh --help \033[34;1mfor additional information.  "
-	dependsblock 
+	dependsblock
 }
 
 ldconf ()
@@ -161,7 +161,7 @@ manual ()
 printmd5syschker ()
 {
 	printf "\033[07;1m\033[31;1m\n 🔆 ERROR md5sum mismatch!  Setup initialization mismatch!\033[36;1m  Update this copy of \`setupTermuxArch.sh\`.  If it is updated, this kind of error can go away, like magic.  Wait before executing again, especially if using a fresh copy from https://raw.githubusercontent.com/sdrausty/TermuxArch/master/setupTermuxArch.sh on this system.  There are many reasons for checksum errors.  Proxies are one reason.  Mirroring and mirrors are another explanation for md5sum errors.   \"Try again, initialization was not successful this time.\"  For more md5sum error information see \`bash setupTermuxArch.sh --help\`.\n\n	Execute \`bash setupTermuxArch.sh\` again. \033[31;1mExiting...\n\033[0m"'\033]2;  Thank you for using setupTermuxArch.sh.  Execute \`bash setupTermuxArch.sh\` again.\007'
-	exit 
+	exit
 }
 
 printtail ()
@@ -187,13 +187,13 @@ rmarch ()
 	elif [[ $uanswer = [Yy]* ]];then
 	printf "\033[30mUninstalling Arch Linux...\n"
 	if [ -e $PREFIX/bin/$bin ] ;then
-	       	rm $PREFIX/bin/$bin 
-	else 
+	       	rm $PREFIX/bin/$bin
+	else
 		printf "Uninstalling Arch Linux, nothing to do for $PREFIX/bin/$bin.\n"
        	fi
 	if [ -d $HOME/arch ] ;then
-		rmarchc 
-	else 
+		rmarchc
+	else
 		printf "Uninstalling Arch Linux, nothing to do for $HOME/arch.\n"
 	fi
 	printf "Uninstalling Arch Linux done.\n"
@@ -286,7 +286,7 @@ spaceinfoq ()
 	fi
 }
 
-# User configurable variables are in `setupTermuxArchConfigs.sh`.  Create this file from `kownconfigurations.sh` in the working directory.  
+# User configurable variables are in `setupTermuxArchConfigs.sh`.  Create this file from `kownconfigurations.sh` in the working directory.
 
 args=$@
 bin=startarch
@@ -299,37 +299,37 @@ dmverbose="-q"
 
 if [[ $1 = [Cc][Dd]* ]] || [[ $1 = -[Cc][Dd]* ]] || [[ $1 = --[Cc][Dd]* ]] || [[ $1 = [Cc][Ss]* ]] || [[ $1 = -[Cc][Ss]* ]] || [[ $1 = --[Cc][Ss]* ]];then
 	dm=curl
-	introdebug 
-	sysinfo 
+	introdebug
+	sysinfo
 elif [[ $1 = [Cc]* ]] || [[ $1 = -[Cc]* ]] || [[ $1 = --[Cc]* ]] || [[ $1 = [Cc][Ii]* ]] || [[ $1 = -[Cc][Ii]* ]] || [[ $1 = --[Cc][Ii]* ]];then
 	dm=curl
-	intro 
+	intro
 	mainblock
 elif [[ $1 = [Ww][Dd]* ]] || [[ $1 = -[Ww][Dd]* ]] || [[ $1 = --[Ww][Dd]* ]] || [[ $1 = [Ww][Ss]* ]] || [[ $1 = -[Ww][Ss]* ]] || [[ $1 = --[Ww][Ss]* ]];then
 	dm=wget
-	introdebug 
-	sysinfo 
+	introdebug
+	sysinfo
 elif [[ $1 = [Ww]* ]] || [[ $1 = -[Ww]* ]] || [[ $1 = --[Ww]* ]] || [[ $1 = [Ww][Ii]* ]] || [[ $1 = -[Ww][Ii]* ]] || [[ $1 = --[Ww][Ii]* ]];then
 	dm=wget
-	intro 
+	intro
 	mainblock
 elif [[ $1 = [Bb]* ]] || [[ $1 = -[Bb]* ]] || [[ $1 = --[Bb]* ]] ;then
 	bloom
 elif [[ $1 = [Dd]* ]] || [[ $1 = -[Dd]* ]] || [[ $1 = --[Dd]* ]] || [[ $1 = [Ss]* ]] || [[ $1 = -[Ss]* ]] || [[ $1 = --[Ss]* ]];then
-	introdebug 
-	sysinfo 
+	introdebug
+	sysinfo
 elif [[ $1 = [Hh]* ]] || [[ $1 = -[Hh]* ]] || [[ $1 = --[Hh]* ]]  || [[ $1 = [?]* ]] || [[ $1 = -[?]* ]] || [[ $1 = --[?]* ]];then
 	printusage
 elif [[ $1 = [Mm]* ]] || [[ $1 = -[Mm]* ]] || [[ $1 = --[Mm]* ]] ;then
 	opt=manual
-	intro 
+	intro
 	mainblock
 elif [[ $1 = [Pp]* ]] || [[ $1 = -[Pp]* ]] || [[ $1 = --[Pp]* ]] || [[ $1 = [Uu]* ]] || [[ $1 = -[Uu]* ]] || [[ $1 = --[Uu]* ]];then
 	rmarch
 elif [[ $1 = "" ]] || [[ $1 = [Ii]* ]] || [[ $1 = -[Ii]* ]] || [[ $1 = --[Ii]* ]];then
-	intro 
+	intro
 	mainblock
 else
 	printusage
 fi
-printtail 
+printtail

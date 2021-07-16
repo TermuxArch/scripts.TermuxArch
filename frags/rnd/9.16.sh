@@ -15,7 +15,7 @@ do
   number=$RANDOM
   echo -n "$number "
   let "count++"
-done  
+done
 }
 
 echo; echo

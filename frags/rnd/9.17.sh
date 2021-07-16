@@ -23,7 +23,7 @@ exit 0
 #      (Hint: you must reseed the srand() function with a different seed
 #+     in each pass through the loop. What happens if you omit this?)
 
-# 2) Using an integer multiplier as a scaling factor, generate random numbers 
+# 2) Using an integer multiplier as a scaling factor, generate random numbers
 #+   in the range of 10 to 100.
 
 # 3) Same as exercise #2, above, but generate random integers this time.

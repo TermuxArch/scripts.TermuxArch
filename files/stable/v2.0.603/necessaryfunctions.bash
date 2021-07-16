@@ -184,11 +184,11 @@ _MAKEFINISHSETUP_() {
 	_CFLHDR_ "root/bin/$BINFNSTP"
 	_DOKEYS_() {
 		if [[ "$CPUABI" = "$CPUABIX86" ]]
-		then 
+		then
 			printf "/root/bin/keys x86\\n" >> root/bin/"$BINFNSTP"
 		elif [[ "$CPUABI" = "$CPUABIX86_64" ]]
 		then
-			 printf "/root/bin/keys x86_64\\n" >> root/bin/"$BINFNSTP" 
+			 printf "/root/bin/keys x86_64\\n" >> root/bin/"$BINFNSTP"
 		else
 			printf "/root/bin/keys\\n" >> root/bin/"$BINFNSTP"
 		fi
@@ -196,14 +196,14 @@ _MAKEFINISHSETUP_() {
 	_DOPROXY_
 	[[ "${LCR:-}" -ne 1 ]] && LOCGEN=""
 	[[ "${LCR:-}" -ne 2 ]] && LOCGEN=""
-	[[ -z "${LCR:-}" ]] && LOCGEN="printf \"\\e[1;32m%s\\e[0;32m\"  \"==> \" 
-	if locale-gen 
+	[[ -z "${LCR:-}" ]] && LOCGEN="printf \"\\e[1;32m%s\\e[0;32m\"  \"==> \"
+	if locale-gen
 	then
 		:
 	else
 		_DOKEYS_
-		pacman -Sy grep gzip sed sudo --noconfirm --color=always 
-		locale-gen 
+		pacman -Sy grep gzip sed sudo --noconfirm --color=always
+		locale-gen
 	fi"
 	cat >> root/bin/"$BINFNSTP" <<- EOM
 	_PMFSESTRING_() {

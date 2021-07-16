@@ -1,8 +1,8 @@
 #!/bin/bash -e
 # Copyright 2017-2018 by SDRausty. All rights reserved.  🌎 🌍 🌏 🌐 🗺
 # Hosting https://sdrausty.github.io/TermuxArch courtesy https://pages.github.com
-# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.  
-# https://sdrausty.github.io/TermuxArch/README has information about this project. 
+# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.
+# https://sdrausty.github.io/TermuxArch/README has information about this project.
 ################################################################################
 
 callsystem ()
@@ -40,44 +40,44 @@ detectsystem ()
 	if [ $(getprop ro.product.cpu.abi) = armeabi ];then
 		armv5l
 	elif [ $(getprop ro.product.cpu.abi) = armeabi-v7a ];then
-		detectsystem2 
+		detectsystem2
 	elif [ $(getprop ro.product.cpu.abi) = arm64-v8a ];then
 		aarch64
 	elif [ $(getprop ro.product.cpu.abi) = x86 ];then
-		i686 
+		i686
 	elif [ $(getprop ro.product.cpu.abi) = x86_64 ];then
 		x86_64
 	else
-		printmismatch 
+		printmismatch
 	fi
 }
 
 detectsystem2 ()
 {
 	if [[ $(getprop ro.product.device) == *_cheets ]];then
-		armv7lChrome 
+		armv7lChrome
 	else
-		armv7lAndroid  
+		armv7lAndroid
 	fi
 }
 
 mainblock ()
-{ 
+{
 	rmarchq
 	spaceinfoq
-	callsystem 
-	$HOME/arch/root/bin/setupbin.sh 
+	callsystem
+	$HOME/arch/root/bin/setupbin.sh
 	termux-wake-unlock
 	rm $HOME/arch/root/bin/setupbin.sh
 	printfooter
-	$HOME/arch/$bin 
+	$HOME/arch/$bin
 }
 
 makebin ()
 {
-	makestartbin 
-	printconfigq 
-	touchupsys 
+	makestartbin
+	printconfigq
+	touchupsys
 }
 
 makesetupbin ()
@@ -102,37 +102,37 @@ makestartbin ()
 
 makesystem ()
 {
-	printdownloading 
-	termux-wake-lock 
+	printdownloading
+	termux-wake-lock
 	if [ $(getprop ro.product.cpu.abi) = x86_64 ] || [ $(getprop ro.product.cpu.abi) = x86 ];then
 		adjustmd5file
 		getimage
 	fi
 	if [ "$mirror" = "os.archlinuxarm.org" ] || [ "$mirror" = "mirror.archlinuxarm.org" ]; then
-		ftchstnd 
+		ftchstnd
 	else
 		ftchit
 	fi
 	printmd5check
 	if md5sum -c $file.md5 ; then
 		printmd5success
-		preproot 
+		preproot
 	else
-		rmarchc 
+		rmarchc
 		printmd5error
 	fi
 	rm *.tar.gz *.tar.gz.md5
-	makebin 
+	makebin
 }
 
 preproot ()
 {
 	if [ $(du ~/arch/*z | awk {'print $1'}) -gt 112233 ];then
 		if [ $(getprop ro.product.cpu.abi) = x86_64 ] || [ $(getprop ro.product.cpu.abi) = x86 ];then
-			proot --link2symlink -0 bsdtar -xpf $file --strip-components 1 
+			proot --link2symlink -0 bsdtar -xpf $file --strip-components 1
 
 		else
-			proot --link2symlink -0 bsdtar -xpf $file 
+			proot --link2symlink -0 bsdtar -xpf $file
 		fi
 	else
 		printf "\n\n\033[31;1mDownload Exception!  Exiting...\n"
@@ -143,10 +143,10 @@ preproot ()
 setlocalegen()
 {
 	if [ -e etc/locale.gen ]; then
-		sed -i '/\#en_US.UTF-8 UTF-8/{s/#//g;s/@/-at-/g;}' etc/locale.gen 
+		sed -i '/\#en_US.UTF-8 UTF-8/{s/#//g;s/@/-at-/g;}' etc/locale.gen
 	else
 		cat >  etc/locale.gen <<- EOM
-		en_US.UTF-8 UTF-8 
+		en_US.UTF-8 UTF-8
 		EOM
 	fi
 }
@@ -154,8 +154,8 @@ setlocalegen()
 touchupsys ()
 {
 	mkdir -p root/bin
-	addbash_profile 
-	addbashrc 
+	addbash_profile
+	addbashrc
 	adddfa
 	addga
 	addgcl
@@ -163,11 +163,11 @@ touchupsys ()
 	addgp
 	addgpl
 	addmotd
-	addprofile 
-	addresolvconf 
-	addt 
-	addyt 
-	addv 
+	addprofile
+	addresolvconf
+	addt
+	addyt
+	addv
 	setlocalegen
 	printf "\n\033[32;1m"
 	if [[ $ed = "" ]];then
@@ -187,6 +187,6 @@ touchupsys ()
 	done
 	$ed $HOME/arch/etc/pacman.d/mirrorlist
 	makefinishsetup
-	makesetupbin 
+	makesetupbin
 }
 

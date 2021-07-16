@@ -10,7 +10,7 @@ return_test ()         # Returns whatever passed to it.
 
 return_test 27         # o.k.
 echo $?                # Returns 27.
-  
+
 return_test 255        # Still o.k.
 echo $?                # Returns 255.
 

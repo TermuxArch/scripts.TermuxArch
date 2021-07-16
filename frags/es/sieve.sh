@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # Copyright 2017-2018 by SDRausty. All rights reserved.  🌎 🌍 🌏 🌐 🗺
 # Hosting https://sdrausty.github.io/TermuxArch courtesy https://pages.github.com
-# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.  
-# https://sdrausty.github.io/TermuxArch/README has information about this project. 
-# sieve.sh 
+# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.
+# https://sdrausty.github.io/TermuxArch/README has information about this project.
+# sieve.sh
 # Ref Example 27-13. The Sieve of Eratosthenes
 # tldp.org/LDP/abs/html/arrays.html
 # Must invoke with command-line argument (limit of primes).
@@ -36,8 +36,8 @@ do
 	       	do
 		       	Primes[t]=
 	       	done
-       	fi  
-done  
+       	fi
+done
 echo "${Primes[*]}"
 
 exit $?

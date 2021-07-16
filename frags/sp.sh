@@ -1,18 +1,18 @@
 #!/bin/bash -e
 # Copyright 2017-2018 by SDRausty. All rights reserved.  🌎 🌍 🌏 🌐 🗺
 # Hosting https://sdrausty.github.io/TermuxArch courtesy https://pages.github.com
-# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.  
-# https://sdrausty.github.io/TermuxArch/README has information about this project. 
+# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.
+# https://sdrausty.github.io/TermuxArch/README has information about this project.
 ################################################################################
 
 spaceinfo ()
 {
 	units=`df 2>/dev/null | awk 'FNR == 1 {print $2}'`
 	if [[ $units = Size ]];then
-		spaceinfogsize 
+		spaceinfogsize
 		printf "$spaceMessage"
 	elif [[ $units = 1K-blocks ]];then
-		spaceinfoksize 
+		spaceinfoksize
 		printf "$spaceMessage"
 	fi
 }
@@ -21,7 +21,7 @@ spaceinfogsize ()
 {
 	usrspace=`df /data 2>/dev/null | awk 'FNR == 2 {print $4}'`
 	if [ $(getprop ro.product.cpu.abi) = x86 ] || [ $(getprop ro.product.cpu.abi) = x86_64 ];then
-		if [[ $usrspace = *G ]];then 
+		if [[ $usrspace = *G ]];then
 			spaceMessage=""
 		elif [[ $usrspace = *M ]];then
 			usspace="${usrspace: : -1}"
@@ -96,4 +96,4 @@ spaceinfoksize ()
 		fi
 	fi
 }
-spaceinfo 
+spaceinfo

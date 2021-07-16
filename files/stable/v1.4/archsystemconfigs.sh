@@ -1,8 +1,8 @@
 #!/bin/bash -e
 # Copyright 2017-2018 by SDRausty. All rights reserved.  🌎 🌍 🌏 🌐 🗺
 # Hosting https://sdrausty.github.io/TermuxArch courtesy https://pages.github.com
-# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.  
-# https://sdrausty.github.io/TermuxArch/README has information about this project. 
+# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.
+# https://sdrausty.github.io/TermuxArch/README has information about this project.
 ################################################################################
 
 addae ()
@@ -12,12 +12,12 @@ addae ()
 	# Copyright 2017-2018 by SDRausty. All rights reserved.  🌎 🌍 🌏 🌐 🗺
 	# Contributed by https://github.com/cb125
 	# Hosting https://sdrausty.github.io/TermuxArch courtesy https://pages.github.com
-	# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.  
-	# https://sdrausty.github.io/TermuxArch/README has information about this project. 
+	# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.
+	# https://sdrausty.github.io/TermuxArch/README has information about this project.
 	################################################################################
 	watch cat /proc/sys/kernel/random/entropy_avail
 	EOM
-	chmod 770 root/bin/ae 
+	chmod 770 root/bin/ae
 }
 
 addauser ()
@@ -27,78 +27,78 @@ addauser ()
 	#!/bin/bash -e
 	# Copyright 2017-2018 by SDRausty. All rights reserved.  🌎 🌍 🌏 🌐 🗺
 	# Hosting https://sdrausty.github.io/TermuxArch courtesy https://pages.github.com
-	# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.  
-	# https://sdrausty.github.io/TermuxArch/README has information about this project. 
+	# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.
+	# https://sdrausty.github.io/TermuxArch/README has information about this project.
 	################################################################################
 	useradd \$1
 	cp -r /root /home/\$1
 	su - \$1
 	EOM
-	chmod 770 root/bin/addauser 
+	chmod 770 root/bin/addauser
 }
 
 addauserps ()
 {
-	# Add Arch Linux user and create user login Termux startup script. 
+	# Add Arch Linux user and create user login Termux startup script.
 	cat > root/bin/addauserps <<- EOM
 	#!/bin/bash -e
 	# Copyright 2017-2018 by SDRausty. All rights reserved.  🌎 🌍 🌏 🌐 🗺
 	# Hosting https://sdrausty.github.io/TermuxArch courtesy https://pages.github.com
-	# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.  
-	# https://sdrausty.github.io/TermuxArch/README has information about this project. 
+	# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.
+	# https://sdrausty.github.io/TermuxArch/README has information about this project.
 	################################################################################
 	useradd \$1
 	cp -r /root /home/\$1
 	su - \$1
 	EOM
-	echo "cat > $HOME/bin/${bin}user\$1 <<- EOM " >> root/bin/addauserps 
+	echo "cat > $HOME/bin/${bin}user\$1 <<- EOM " >> root/bin/addauserps
 	cat >> root/bin/addauserps <<- EOM
 	#!/bin/bash -e
 	# Copyright 2017-2018 by SDRausty. All rights reserved.  🌎 🌍 🌏 🌐 🗺
 	# Hosting https://sdrausty.github.io/TermuxArch courtesy https://pages.github.com
-	# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.  
-	# https://sdrausty.github.io/TermuxArch/README has information about this project. 
+	# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.
+	# https://sdrausty.github.io/TermuxArch/README has information about this project.
 	################################################################################
 	unset LD_PRELOAD
 	exec proot --kill-on-exit --link2symlink -0 -r $installdir -b /dev/ -b \$ANDROID_DATA -b \$EXTERNAL_STORAGE -b /proc/ -w "\$PWD" /bin/env -i HOME=/root TERM=\$TERM /bin/su - \$1 --login
 	EOM
-	echo EOM >> root/bin/addauserps 
+	echo EOM >> root/bin/addauserps
 	cat >> root/bin/addauserps <<- EOM
 	chmod 770 $HOME/bin/${bin}user\$1
 	EOM
-	chmod 770 root/bin/addauserps 
+	chmod 770 root/bin/addauserps
 }
 
 addauserpsc ()
 {
-	# Add Arch Linux user and create user login Termux startup script. 
+	# Add Arch Linux user and create user login Termux startup script.
 	cat > root/bin/addauserpsc <<- EOM
 	#!/bin/bash -e
 	# Copyright 2017-2018 by SDRausty. All rights reserved.  🌎 🌍 🌏 🌐 🗺
 	# Hosting https://sdrausty.github.io/TermuxArch courtesy https://pages.github.com
-	# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.  
-	# https://sdrausty.github.io/TermuxArch/README has information about this project. 
+	# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.
+	# https://sdrausty.github.io/TermuxArch/README has information about this project.
 	################################################################################
 	useradd \$1
 	cp -r /root /home/\$1
 	su - \$1
 	EOM
-	echo "cat > $HOME/bin/${bin}user\$1 <<- EOM " >> root/bin/addauserpsc 
+	echo "cat > $HOME/bin/${bin}user\$1 <<- EOM " >> root/bin/addauserpsc
 	cat >> root/bin/addauserpsc <<- EOM
 	#!/bin/bash -e
 	# Copyright 2017-2018 by SDRausty. All rights reserved.  🌎 🌍 🌏 🌐 🗺
 	# Hosting https://sdrausty.github.io/TermuxArch courtesy https://pages.github.com
-	# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.  
-	# https://sdrausty.github.io/TermuxArch/README has information about this project. 
+	# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.
+	# https://sdrausty.github.io/TermuxArch/README has information about this project.
 	################################################################################
 	unset LD_PRELOAD
 	exec proot --kill-on-exit --link2symlink -0 -r $installdir -b /dev/ -b \$ANDROID_DATA -b \$EXTERNAL_STORAGE -b /proc/ -w "\$PWD" /bin/env -i HOME=/root TERM=\$TERM /bin/su - \$1 --login
 	EOM
-	echo EOM >> root/bin/addauserpsc 
+	echo EOM >> root/bin/addauserpsc
 	cat >> root/bin/addauserpsc <<- EOM
 	chmod 770 $HOME/bin/${bin}user\$1
 	EOM
-	chmod 770 root/bin/addauserpsc 
+	chmod 770 root/bin/addauserpsc
 }
 
 addbash_profile ()
@@ -155,8 +155,8 @@ addce ()
 	#!/bin/bash -e
 	# Copyright 2017-2018 by SDRausty. All rights reserved.  🌎 🌍 🌏 🌐 🗺
 	# Hosting https://sdrausty.github.io/TermuxArch courtesy https://pages.github.com
-	# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.  
-	# https://sdrausty.github.io/TermuxArch/README has information about this project. 
+	# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.
+	# https://sdrausty.github.io/TermuxArch/README has information about this project.
 	# Create entropy by doing things on device.
 	################################################################################
 	printf "\033[1;32m"'\033]2;  Thank you for using \`ce\` from TermuxArch 📲  \007'
@@ -173,7 +173,7 @@ addce ()
 		sleep 0.2
 	done
 	EOM
-	chmod 770 root/bin/ce 
+	chmod 770 root/bin/ce
 }
 
 addces ()
@@ -182,22 +182,22 @@ addces ()
 	#!/bin/bash -e
 	# Copyright 2017-2018 by SDRausty. All rights reserved.  🌎 🌍 🌏 🌐 🗺
 	# Hosting https://sdrausty.github.io/TermuxArch courtesy https://pages.github.com
-	# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.  
-	# https://sdrausty.github.io/TermuxArch/README has information about this project. 
+	# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.
+	# https://sdrausty.github.io/TermuxArch/README has information about this project.
 	# Create entropy Termux startup file.
 	################################################################################
 	unset LD_PRELOAD
 	EOM
 	if [[ "$kid" -eq 1 ]]; then
 		cat >> bin/ces <<- EOM
-		exec proot --kill-on-exit --kernel-release=4.14.15 --link2symlink -0 -r $installdir -b /dev/ -b \$ANDROID_DATA -b \$EXTERNAL_STORAGE -b /proc/ -w "\$PWD" /bin/env -i HOME=/root TERM=\$TERM $installdir/root/bin/ce 
+		exec proot --kill-on-exit --kernel-release=4.14.15 --link2symlink -0 -r $installdir -b /dev/ -b \$ANDROID_DATA -b \$EXTERNAL_STORAGE -b /proc/ -w "\$PWD" /bin/env -i HOME=/root TERM=\$TERM $installdir/root/bin/ce
 		EOM
 	else
 		cat >> bin/ces <<- EOM
-		exec proot --kill-on-exit --link2symlink -0 -r $installdir -b /dev/ -b \$ANDROID_DATA -b \$EXTERNAL_STORAGE -b /proc/ -w "\$PWD" /bin/env -i HOME=/root TERM=\$TERM $installdir/root/bin/ce 
+		exec proot --kill-on-exit --link2symlink -0 -r $installdir -b /dev/ -b \$ANDROID_DATA -b \$EXTERNAL_STORAGE -b /proc/ -w "\$PWD" /bin/env -i HOME=/root TERM=\$TERM $installdir/root/bin/ce
 		EOM
 	fi
-	chmod 770 bin/ces 
+	chmod 770 bin/ces
 }
 
 adddfa ()
@@ -206,14 +206,14 @@ adddfa ()
 	#!/bin/bash -e
 	# Copyright 2017-2018 by SDRausty. All rights reserved.  🌎 🌍 🌏 🌐 🗺
 	# Hosting https://sdrausty.github.io/TermuxArch courtesy https://pages.github.com
-	# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.  
-	# https://sdrausty.github.io/TermuxArch/README has information about this project. 
+	# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.
+	# https://sdrausty.github.io/TermuxArch/README has information about this project.
 	################################################################################
 	units=\`df 2>/dev/null | awk 'FNR == 1 {print \$2}'\`
 	usrspace=\`df 2>/dev/null | grep "/data" | awk {'print \$4'}\`
 	printf "\033[0;33m\$usrspace \$units of free user space is available on this device.\n\033[0m"
 	EOM
-	chmod 770 root/bin/dfa 
+	chmod 770 root/bin/dfa
 }
 
 addga ()
@@ -222,8 +222,8 @@ addga ()
 	#!/bin/bash -e
 	# Copyright 2017-2018 by SDRausty. All rights reserved.  🌎 🌍 🌏 🌐 🗺
 	# Hosting https://sdrausty.github.io/TermuxArch courtesy https://pages.github.com
-	# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.  
-	# https://sdrausty.github.io/TermuxArch/README has information about this project. 
+	# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.
+	# https://sdrausty.github.io/TermuxArch/README has information about this project.
 	################################################################################
 	if [ ! -e /usr/bin/git ] ; then
 		pacman --noconfirm --color=always -Syu git
@@ -232,7 +232,7 @@ addga ()
 		git add .
 	fi
 	EOM
-	chmod 770 root/bin/ga 
+	chmod 770 root/bin/ga
 }
 
 addgcl ()
@@ -241,17 +241,17 @@ addgcl ()
 	#!/bin/bash -e
 	# Copyright 2017-2018 by SDRausty. All rights reserved.  🌎 🌍 🌏 🌐 🗺
 	# Hosting https://sdrausty.github.io/TermuxArch courtesy https://pages.github.com
-	# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.  
-	# https://sdrausty.github.io/TermuxArch/README has information about this project. 
+	# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.
+	# https://sdrausty.github.io/TermuxArch/README has information about this project.
 	################################################################################
 	if [ ! -e /usr/bin/git ] ; then
-		pacman --noconfirm --color=always -Syu git 
+		pacman --noconfirm --color=always -Syu git
 		git clone \$@
 	else
 		git clone \$@
 	fi
 	EOM
-	chmod 770 root/bin/gcl 
+	chmod 770 root/bin/gcl
 }
 
 addgcm ()
@@ -260,17 +260,17 @@ addgcm ()
 	#!/bin/bash -e
 	# Copyright 2017-2018 by SDRausty. All rights reserved.  🌎 🌍 🌏 🌐 🗺
 	# Hosting https://sdrausty.github.io/TermuxArch courtesy https://pages.github.com
-	# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.  
-	# https://sdrausty.github.io/TermuxArch/README has information about this project. 
+	# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.
+	# https://sdrausty.github.io/TermuxArch/README has information about this project.
 	################################################################################
 	if [ ! -e /usr/bin/git ] ; then
-		pacman --noconfirm --color=always -Syu git 
+		pacman --noconfirm --color=always -Syu git
 		git commit
 	else
 		git commit
 	fi
 	EOM
-	chmod 770 root/bin/gcm 
+	chmod 770 root/bin/gcm
 }
 
 addgpl ()
@@ -279,17 +279,17 @@ addgpl ()
 	#!/bin/bash -e
 	# Copyright 2017-2018 by SDRausty. All rights reserved.  🌎 🌍 🌏 🌐 🗺
 	# Hosting https://sdrausty.github.io/TermuxArch courtesy https://pages.github.com
-	# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.  
-	# https://sdrausty.github.io/TermuxArch/README has information about this project. 
+	# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.
+	# https://sdrausty.github.io/TermuxArch/README has information about this project.
 	################################################################################
 	if [ ! -e /usr/bin/git ] ; then
-		pacman --noconfirm --color=always -Syu git 
+		pacman --noconfirm --color=always -Syu git
 		git pull
 	else
 		git pull
 	fi
 	EOM
-	chmod 770 root/bin/gpl 
+	chmod 770 root/bin/gpl
 }
 
 addgp ()
@@ -298,18 +298,18 @@ addgp ()
 	#!/bin/bash -e
 	# Copyright 2017-2018 by SDRausty. All rights reserved.  🌎 🌍 🌏 🌐 🗺
 	# Hosting https://sdrausty.github.io/TermuxArch courtesy https://pages.github.com
-	# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.  
-	# https://sdrausty.github.io/TermuxArch/README has information about this project. 
+	# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.
+	# https://sdrausty.github.io/TermuxArch/README has information about this project.
 	# git push https://username:password@github.com/username/repository.git master
 	################################################################################
 	if [ ! -e /usr/bin/git ] ; then
-		pacman --noconfirm --color=always -Syu git 
+		pacman --noconfirm --color=always -Syu git
 		git push
 	else
 		git push
 	fi
 	EOM
-	chmod 700 root/bin/gp 
+	chmod 700 root/bin/gp
 }
 
 addmotd ()
@@ -344,17 +344,17 @@ addt ()
 	#!/bin/bash -e
 	# Copyright 2017-2018 by SDRausty. All rights reserved.  🌎 🌍 🌏 🌐 🗺
 	# Hosting https://sdrausty.github.io/TermuxArch courtesy https://pages.github.com
-	# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.  
-	# https://sdrausty.github.io/TermuxArch/README has information about this project. 
+	# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.
+	# https://sdrausty.github.io/TermuxArch/README has information about this project.
 	################################################################################
 	if [ ! -e /usr/bin/tree ] ; then
-		pacman --noconfirm --color=always -Syu tree 
+		pacman --noconfirm --color=always -Syu tree
 		tree \$@
 	else
 		tree \$@
 	fi
 	EOM
-	chmod 770 root/bin/t 
+	chmod 770 root/bin/t
 }
 
 addtour ()
@@ -363,8 +363,8 @@ addtour ()
 	#!/bin/bash -e
 	# Copyright 2017-2018 by SDRausty. All rights reserved.  🌎 🌍 🌏 🌐 🗺
 	# Hosting https://sdrausty.github.io/TermuxArch courtesy https://pages.github.com
-	# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.  
-	# https://sdrausty.github.io/TermuxArch/README has information about this project. 
+	# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.
+	# https://sdrausty.github.io/TermuxArch/README has information about this project.
 	################################################################################
 	printf "\n\033[1;32m==> \033[1;37mRunning \033[1;32mlr ~\033[1;37m\n\n"
 	ls -R --color=always ~
@@ -380,7 +380,7 @@ addtour ()
 	sleep 1
 	printf "\n\033[1;32m==> \033[1;37mShort tour is complete.  Run this script again at a later time and you might be surprised at how the environment changes.\n\n"
 	EOM
-	chmod 770 root/bin/tour 
+	chmod 770 root/bin/tour
 }
 
 addtrim ()
@@ -394,17 +394,17 @@ addv ()
 	#!/bin/bash -e
 	# Copyright 2017-2018 by SDRausty. All rights reserved.  🌎 🌍 🌏 🌐 🗺
 	# Hosting https://sdrausty.github.io/TermuxArch courtesy https://pages.github.com
-	# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.  
-	# https://sdrausty.github.io/TermuxArch/README has information about this project. 
+	# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.
+	# https://sdrausty.github.io/TermuxArch/README has information about this project.
 	################################################################################
 	if [ ! -e /usr/bin/vim ] ; then
-		pacman --noconfirm --color=always -Syu vim 
+		pacman --noconfirm --color=always -Syu vim
 		vim \$@
 	else
 		vim \$@
 	fi
 	EOM
-	chmod 770 root/bin/v 
+	chmod 770 root/bin/v
 }
 
 addwe ()
@@ -414,14 +414,14 @@ addwe ()
 	# Watch available entropy on device.
 	# Copyright 2017-2018 by SDRausty. All rights reserved.  🌎 🌍 🌏 🌐 🗺
 	# Hosting https://sdrausty.github.io/TermuxArch courtesy https://pages.github.com
-	# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.  
-	# https://sdrausty.github.io/TermuxArch/README has information about this project. 
+	# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.
+	# https://sdrausty.github.io/TermuxArch/README has information about this project.
 	# cat /proc/sys/kernel/random/entropy_avail contributed by https://github.com/cb125
 	################################################################################
 
 	i=1
 	multi=16
-	entropy0=\$(cat /proc/sys/kernel/random/entropy_avail 2>/dev/null) 
+	entropy0=\$(cat /proc/sys/kernel/random/entropy_avail 2>/dev/null)
 
 	printintro ()
 	{
@@ -473,10 +473,10 @@ addwe ()
 	{
 	for i in \$(seq 1 \$en0); do
 		printf "\033[0;32m\$i \033[1;30m\$en0 "
-		entropy0=\$(cat /proc/sys/kernel/random/entropy_avail 2>/dev/null) 
-		infif 
-		printf %b "\033[1;32m\${entropy0} " 
-		esleep 
+		entropy0=\$(cat /proc/sys/kernel/random/entropy_avail 2>/dev/null)
+		infif
+		printf %b "\033[1;32m\${entropy0} "
+		esleep
 		sleep \$int
 	done
 	}
@@ -484,10 +484,10 @@ addwe ()
 	entropysimple ()
 	{
 	for i in \$(seq 1 \$en0); do
-		entropy0=\$(cat /proc/sys/kernel/random/entropy_avail 2>/dev/null) 
-		infif 
-		printf %b "\033[1;32m\${entropy0} " 
-		esleep 
+		entropy0=\$(cat /proc/sys/kernel/random/entropy_avail 2>/dev/null)
+		infif
+		printf %b "\033[1;32m\${entropy0} "
+		esleep
 		sleep \$int
 	done
 	}
@@ -495,46 +495,46 @@ addwe ()
 	entropyverbose ()
 	{
 	for i in \$(seq 1 \$en0); do
-		entropy0=\$(cat /proc/sys/kernel/random/entropy_avail 2>/dev/null) 
-		infif 
-		printf %b "\033[1;32m\${entropy0}\033[0;32m#E&&√♪" 
-		esleep 
+		entropy0=\$(cat /proc/sys/kernel/random/entropy_avail 2>/dev/null)
+		infif
+		printf %b "\033[1;32m\${entropy0}\033[0;32m#E&&√♪"
+		esleep
 		sleep \$int
-		entropy1=\$(cat /proc/sys/kernel/random/uuid 2>/dev/null) 
-		infif 
-		printf %b "\$entropy1" 
-		esleep 
+		entropy1=\$(cat /proc/sys/kernel/random/uuid 2>/dev/null)
+		infif
+		printf %b "\$entropy1"
+		esleep
 		sleep \$int
-		printf %b "&&π™♪&#\033[1;32m\${i}\033[0;32mof\033[1;32m\${en0}\033[0;32m#|♪FLT" 
-		esleep 
+		printf %b "&&π™♪&#\033[1;32m\${i}\033[0;32mof\033[1;32m\${en0}\033[0;32m#|♪FLT"
+		esleep
 		sleep \$int
 		printf %b "\${int}♪||e"
-		esleep 
+		esleep
 		sleep \$int
 	done
 	}
 
 	# [we verbose] Run simple watch entropy.
 	if [[ \$1 = [Ss]* ]] || [[ \$1 = -[Ss]* ]] || [[ \$1 = --[Ss]* ]];then
-		printintro 
+		printintro
 		bcif
-		entropysimple 
+		entropysimple
 	# [we verbose] Run verbose watch entropy.
 	elif [[ \$1 = [Vv]* ]] || [[ \$1 = -[Vv]* ]] || [[ \$1 = --[Vv]* ]];then
-		printintro 
+		printintro
 		bcif
-		entropyverbose 
+		entropyverbose
 	# [] Run default watch entropy.
 	elif [[ \$1 = "" ]];then
-		printintro 
+		printintro
 		bcif
-		entropyverbose 
+		entropyverbose
 	else
 		printusage
 	fi
-	printtail 
+	printtail
 	EOM
-	chmod 770 bin/we 
+	chmod 770 bin/we
 }
 
 addyt ()
@@ -543,8 +543,8 @@ addyt ()
 	#!/bin/bash -e
 	# Copyright 2017-2018 by SDRausty. All rights reserved.  🌎 🌍 🌏 🌐 🗺
 	# Hosting https://sdrausty.github.io/TermuxArch courtesy https://pages.github.com
-	# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.  
-	# https://sdrausty.github.io/TermuxArch/README has information about this project. 
+	# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.
+	# https://sdrausty.github.io/TermuxArch/README has information about this project.
 	################################################################################
 	if [ ! -e /usr/bin/youtube-dl ] ; then
 		pacman --noconfirm --color=always -Syu python-pip
@@ -554,6 +554,6 @@ addyt ()
 		youtube-dl \$@
 	fi
 	EOM
-	chmod 770 root/bin/yt 
+	chmod 770 root/bin/yt
 }
 

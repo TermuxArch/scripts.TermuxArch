@@ -1,14 +1,14 @@
 #!/bin/env bash
 # Copyright 2017-2018 by SDRausty. All rights reserved.  🌎 🌍 🌏 🌐 🗺
 # Hosting https://sdrausty.github.io/TermuxArch courtesy https://pages.github.com
-# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.  
-# https://sdrausty.github.io/TermuxArch/README has information about this project. 
+# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.
+# https://sdrausty.github.io/TermuxArch/README has information about this project.
 ################################################################################
 
 sysinfo() {
 	spaceinfo
-	printf "\\n\\e[1;32mGenerating TermuxArch system information; Please wait…\\n\\n" 
-	systeminfo ## & spinner "Generating" "System Information…" 
+	printf "\\n\\e[1;32mGenerating TermuxArch system information; Please wait…\\n\\n"
+	systeminfo ## & spinner "Generating" "System Information…"
 	printf "\\e[38;5;76m"
 	cat "${wdir}setupTermuxArchSysInfo$STIME".log
 	printf "\\n\\e[1mThis information may be quite important when planning issue(s) at https://github.com/sdrausty/TermuxArch/issues with the hope of improving \`setupTermuxArch.sh\`;  Include input and output, along with screenshot(s) relavent to X, and similar.\\n\\n"
@@ -41,25 +41,25 @@ systeminfo () {
 	printf "\\nuname -a results:\\n\\n" >> "${wdir}setupTermuxArchSysInfo$STIME".log
 	uname -a >> "${wdir}setupTermuxArchSysInfo$STIME".log
 	printf "\\n" >> "${wdir}setupTermuxArchSysInfo$STIME".log
-	for n in 0 1 2 3 4 5 
-	do 
+	for n in 0 1 2 3 4 5
+	do
 		echo "BASH_VERSINFO[$n] = ${BASH_VERSINFO[$n]}"  >> "${wdir}setupTermuxArchSysInfo$STIME".log
 	done
 	printf "\\ncat /proc/cpuinfo results:\\n\\n" >> "${wdir}setupTermuxArchSysInfo$STIME".log
 	cat /proc/cpuinfo >> "${wdir}setupTermuxArchSysInfo$STIME".log
 	printf "\\nDownload directory information results:\\n\\n" >> "${wdir}setupTermuxArchSysInfo$STIME".log
-	if [[ -d /sdcard/Download ]]; then echo "/sdcard/Download exists"; else echo "/sdcard/Download not found"; fi >> "${wdir}setupTermuxArchSysInfo$STIME".log 
+	if [[ -d /sdcard/Download ]]; then echo "/sdcard/Download exists"; else echo "/sdcard/Download not found"; fi >> "${wdir}setupTermuxArchSysInfo$STIME".log
 	if [[ -d /storage/emulated/0/Download ]]; then echo "/storage/emulated/0/Download exists"; else echo "/storage/emulated/0/Download not found"; fi >> "${wdir}setupTermuxArchSysInfo$STIME".log
-	if [[ -d "$HOME"/downloads ]]; then echo "$HOME/downloads exists"; else echo "~/downloads not found"; fi >> "${wdir}setupTermuxArchSysInfo$STIME".log 
-	if [[ -d "$HOME"/storage/downloads ]]; then echo "$HOME/storage/downloads exists"; else echo "$HOME/storage/downloads not found"; fi >> "${wdir}setupTermuxArchSysInfo$STIME".log 
+	if [[ -d "$HOME"/downloads ]]; then echo "$HOME/downloads exists"; else echo "~/downloads not found"; fi >> "${wdir}setupTermuxArchSysInfo$STIME".log
+	if [[ -d "$HOME"/storage/downloads ]]; then echo "$HOME/storage/downloads exists"; else echo "$HOME/storage/downloads not found"; fi >> "${wdir}setupTermuxArchSysInfo$STIME".log
 	printf "\\nDevice information results:\\n\\n" >> "${wdir}setupTermuxArchSysInfo$STIME".log
-	if [[ -e /dev/ashmem ]]; then echo "/dev/ashmem exists"; else echo "/dev/ashmem does not exist"; fi >> "${wdir}setupTermuxArchSysInfo$STIME".log 
-	if [[ -r /dev/ashmem ]]; then echo "/dev/ashmem is readable"; else echo "/dev/ashmem is not readable"; fi >> "${wdir}setupTermuxArchSysInfo$STIME".log 
-	if [[ -e /dev/shm ]]; then echo "/dev/shm exists"; else echo "/dev/shm does not exist"; fi >> "${wdir}setupTermuxArchSysInfo$STIME".log 
-	if [[ -r /dev/shm ]]; then echo "/dev/shm is readable"; else echo "/dev/shm is not readable"; fi >> "${wdir}setupTermuxArchSysInfo$STIME".log 
-	if [[ -e /proc/stat ]]; then echo "/proc/stat exits"; else echo "/proc/stat does not exit"; fi >> "${wdir}setupTermuxArchSysInfo$STIME".log 
-	if [[ -r /proc/stat ]]; then echo "/proc/stat is readable"; else echo "/proc/stat is not readable"; fi >> "${wdir}setupTermuxArchSysInfo$STIME".log 
-	printf "\\nDisk report $usrspace on /data $(date)\\n" >> "${wdir}setupTermuxArchSysInfo$STIME".log 
+	if [[ -e /dev/ashmem ]]; then echo "/dev/ashmem exists"; else echo "/dev/ashmem does not exist"; fi >> "${wdir}setupTermuxArchSysInfo$STIME".log
+	if [[ -r /dev/ashmem ]]; then echo "/dev/ashmem is readable"; else echo "/dev/ashmem is not readable"; fi >> "${wdir}setupTermuxArchSysInfo$STIME".log
+	if [[ -e /dev/shm ]]; then echo "/dev/shm exists"; else echo "/dev/shm does not exist"; fi >> "${wdir}setupTermuxArchSysInfo$STIME".log
+	if [[ -r /dev/shm ]]; then echo "/dev/shm is readable"; else echo "/dev/shm is not readable"; fi >> "${wdir}setupTermuxArchSysInfo$STIME".log
+	if [[ -e /proc/stat ]]; then echo "/proc/stat exits"; else echo "/proc/stat does not exit"; fi >> "${wdir}setupTermuxArchSysInfo$STIME".log
+	if [[ -r /proc/stat ]]; then echo "/proc/stat is readable"; else echo "/proc/stat is not readable"; fi >> "${wdir}setupTermuxArchSysInfo$STIME".log
+	printf "\\nDisk report $usrspace on /data $(date)\\n" >> "${wdir}setupTermuxArchSysInfo$STIME".log
 	printf "\\ndf $installdir results:\\n\\n" >> "${wdir}setupTermuxArchSysInfo$STIME".log
 	df "$installdir" >> "${wdir}setupTermuxArchSysInfo$STIME".log 2>/dev/null ||:
 	printf "\\ndf results:\\n\\n" >> "${wdir}setupTermuxArchSysInfo$STIME".log
@@ -72,43 +72,43 @@ systeminfo () {
 }
 
 copyimage() { # A systemimage.tar.gz file can be used: `setupTermuxArch.sh ./[path/]systemimage.tar.gz` and `setupTermuxArch.sh /absolutepath/systemimage.tar.gz`
- 	cfile="${1##/*/}" 
-	file="$(basename "$cfile")" 
+ 	cfile="${1##/*/}"
+	file="$(basename "$cfile")"
 # 	echo $file
 # 	echo $lcp
 # 	echo lcp
 # 	pwd
 # 	echo pwd
  	if [[ "$lcp" = "0" ]];then
-		echo "Copying $1.md5 to $installdir…" 
+		echo "Copying $1.md5 to $installdir…"
 		cp "$1".md5  "$installdir"
-		echo "Copying $1 to $installdir…" 
+		echo "Copying $1 to $installdir…"
 		cp "$1" "$installdir"
  	elif [[ "$lcp" = "1" ]];then
-		echo "Copying $1.md5 to $installdir…" 
+		echo "Copying $1.md5 to $installdir…"
 		cp "$wdir$1".md5  "$installdir"
-		echo "Copying $1 to $installdir…" 
+		echo "Copying $1 to $installdir…"
 		cp "$wdir$1" "$installdir"
  	fi
 # 	ls  "$installdir"
 }
 
-loadimage() { 
-	namestartarch 
+loadimage() {
+	namestartarch
  	spaceinfo
-	printf "\\n" 
+	printf "\\n"
 	wakelock
-	_PREPINSTALLDIR 
-  	copyimage ## "$@" & spinner "Copying" "…" 
+	_PREPINSTALLDIR
+  	copyimage ## "$@" & spinner "Copying" "…"
 	printmd5check
 	md5check
-	printcu 
+	printcu
 	rm -f "$installdir"/*.tar.gz "$installdir"/*.tar.gz.md5
-	printdone 
-	printconfigup 
-	touchupsys 
-	printf "\\n" 
-	wakeunlock 
+	printdone
+	printconfigup
+	touchupsys
+	printf "\\n"
+	wakeunlock
 	printfooter
 	"$installdir/$startbin" ||:
 # 	"$startbin" help
@@ -118,9 +118,9 @@ loadimage() {
 
 refreshsys() { # Refreshes
 	printf '\033]2; setupTermuxArch.sh refresh 📲 \007'
-	nameinstalldir 
-	namestartarch  
-	setrootdir  
+	nameinstalldir
+	namestartarch
+	setrootdir
 	if [[ ! -d "$installdir" ]] || [[ ! -f "$installdir"/bin/env ]] || [[ ! -f "$installdir"/bin/we ]] || [[ ! -d "$installdir"/root/bin ]];then
 		printf "\\n\\e[0;33m%s\\e[1;33m%s\\e[0;33m.\\e[0m\\n" "The root directory structure is incorrect; Cannot continue " "setupTermuxArch.sh refresh"
 		exit $?
@@ -131,12 +131,12 @@ refreshsys() { # Refreshes
 	addREADME
 	addae
 	addauser
-	addbash_logout 
-	addbash_profile 
-	addbashrc 
+	addbash_logout
+	addbash_profile
+	addbashrc
 	addcdtd
 	addcdth
-	addch 
+	addch
 	adddfa
 	addfbindexample
 	addbinds
@@ -152,33 +152,33 @@ refreshsys() { # Refreshes
 	addmoto
 	addpc
 	addpci
-	addprofile 
-	addresolvconf 
-	addt 
+	addprofile
+	addresolvconf
+	addt
 	addthstartarch
 	addtour
-	addtrim 
-	addyt 
-	addwe  
-	addv 
+	addtrim
+	addyt
+	addwe
+	addv
 	makefinishsetup
-	makesetupbin 
-	makestartbin 
+	makesetupbin
+	makestartbin
 	_SETLOCALE
-	printf "\\n" 
+	printf "\\n"
 	wakelock
 	printf '\033]2; setupTermuxArch.sh refresh 📲 \007'
-	printf "\\n\\e[1;32m==> \\e[1;37m%s \\e[1;32m%s %s 📲 \\a\\n" "Running" "$(basename "$0")" "$args" 
-	"$installdir"/root/bin/setupbin.sh ||: 
+	printf "\\n\\e[1;32m==> \\e[1;37m%s \\e[1;32m%s %s 📲 \\a\\n" "Running" "$(basename "$0")" "$args"
+	"$installdir"/root/bin/setupbin.sh ||:
  	rm -f root/bin/finishsetup.sh
- 	rm -f root/bin/setupbin.sh 
+ 	rm -f root/bin/setupbin.sh
 	printf "\\e[1;34mThe following files have been updated to the newest version.\\n\\n\\e[0;32m"
 	ls "$installdir/$startbin" |cut -f7- -d /
 	ls "$installdir"/bin/we |cut -f7- -d /
 	ls "$installdir"/root/bin/* |cut -f7- -d /
-	printf "\\n" 
-	wakeunlock 
-	printfooter 
+	printf "\\n"
+	wakeunlock
+	printfooter
 	printf "\\a"
 	"$installdir/$startbin" ||:
 # 	"$startbin" help
@@ -189,20 +189,20 @@ refreshsys() { # Refreshes
 
 spaceinfo() {
 	declare spaceMessage=""
-	units="$(df "$installdir" 2>/dev/null | awk 'FNR == 1 {print $2}')" 
+	units="$(df "$installdir" 2>/dev/null | awk 'FNR == 1 {print $2}')"
 	if [[ "$units" = Size ]] ; then
-		spaceinfogsize 
+		spaceinfogsize
 		printf "$spaceMessage"
 	elif [[ "$units" = 1K-blocks ]] ; then
-		spaceinfoksize 
+		spaceinfoksize
 		printf "$spaceMessage"
 	fi
 }
 
 spaceinfogsize() {
-	userspace 
+	userspace
 	if [[ "$CPUABI" = "$CPUABIX86" ]] || [[ "$CPUABI" = "$CPUABIX86_64" ]] ; then
-		if [[ "$usrspace" = *G ]] ; then 
+		if [[ "$usrspace" = *G ]] ; then
 			spaceMessage=""
 		elif [[ "$usrspace" = *M ]] ; then
 			usspace="${usrspace: : -1}"
@@ -240,7 +240,7 @@ spaceinfoq() {
 				printf "\\n\\e[1;30m"
 				read -n 1 -p "Continue with setupTermuxArch.sh? [Y|n] " suanswer
 				if [[ "$suanswer" = [Ee]* ]] || [[ "$suanswer" = [Nn]* ]] || [[ "$suanswer" = [Qq]* ]] ; then
-					printf "\\n" 
+					printf "\\n"
 					exit $?
 				elif [[ "$suanswer" = [Yy]* ]] || [[ "$suanswer" = "" ]] ; then
 					suanswer=yes
@@ -255,7 +255,7 @@ spaceinfoq() {
 }
 
 spaceinfoksize() {
-	userspace 
+	userspace
 	if [[ "$CPUABI" = "$CPUABI8" ]] ; then
 		if [[ "$usrspace" -lt "1500000" ]] ; then
 			spaceMessage="\\n\\e[0;33mTermuxArch: \\e[1;33mFREE SPACE WARNING!  \\e[1;30mStart thinking about cleaning out some stuff.  \\e[33m$usrspace $units of free user space is available on this device.  \\e[1;30mThe recommended minimum to install Arch Linux in Termux PRoot for aarch64 is 1.5G of free user space.\\n\\e[0m"

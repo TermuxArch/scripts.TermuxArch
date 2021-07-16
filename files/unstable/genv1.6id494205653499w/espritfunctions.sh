@@ -1,8 +1,8 @@
 #!/bin/env bash
 # Copyright 2018 by SDRausty. All rights reserved.  🌎 🌍 🌏 🌐 🗺
 # Hosting https://sdrausty.github.io/TermuxArch courtesy https://pages.github.com
-# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.  
-# https://sdrausty.github.io/TermuxArch/README has information about TermuxArch. 
+# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.
+# https://sdrausty.github.io/TermuxArch/README has information about TermuxArch.
 ################################################################################
 
 addlangq() {
@@ -24,11 +24,11 @@ addlangq() {
 	done
 }
 
-bloom() { # Bloom = `setupTermuxArch.sh manual verbose` 
-	if [[ -d "$HOME"/TermuxArchBloom ]];then 
-		rmbloomq 
+bloom() { # Bloom = `setupTermuxArch.sh manual verbose`
+	if [[ -d "$HOME"/TermuxArchBloom ]];then
+		rmbloomq
 	fi
-	if [[ ! -d "$HOME"/TermuxArchBloom ]];then 
+	if [[ ! -d "$HOME"/TermuxArchBloom ]];then
 		mkdir "$HOME"/TermuxArchBloom
 	fi
 	cp *sh "$HOME"/TermuxArchBloom
@@ -69,7 +69,7 @@ editors() {
 		cedst+="\`\\e[1;32m${ceds[$i]}\\e[0;32m\`, "
 	done
 	for i in "${!ceds[@]}"; do
-		edq 
+		edq
 		if [[ "$ind" = 1 ]];then
 			break
 		fi
@@ -102,7 +102,7 @@ edqaquestion() {
 		if [[ "$opt" = bloom ]] || [[ "$opt" = manual ]];then
 			printf "The following editor(s) $cedst\\b\\b are present.  Would you like to use \`\\e[1;32m${ceds[$i]}\\e[0;32m\` to edit \`\\e[1;32msetupTermuxArchConfigs.sh\\e[0;32m\`?  "
 			read -n 1 -p "Answer yes or no [Y|n]. "  yn
-		else 
+		else
 			printf "Change the worldwide mirror to a mirror that is geographically nearby.  Choose only ONE active mirror in the mirrors file that you are about to edit.  The following editor(s) $cedst\\b\\b are present.  Would you like to use \`\\e[1;32m${ceds[$i]}\\e[0;32m\` to edit the Arch Linux configuration files?  "
 			read -n 1 -p "Answer yes or no [Y|n]. "  yn
 		fi
@@ -124,7 +124,7 @@ edq2() {
 		if [[ "$opt" = bloom ]] || [[ "$opt" = manual ]];then
 			printf "\\n\\e[1;34m  Would you like to use \\e[1;32mnano\\e[1;34m or \\e[1;32mvi\\e[1;34m to edit \\e[1;32msetupTermuxArchConfigs.sh\\e[1;34m?  "
 			read -n 1 -p "Answer nano or vi [n|V]? "  nv
-		else 
+		else
 			printf "\\e[1;34m  Change the worldwide mirror to a mirror that is geographically nearby.  Choose only ONE active mirror in the mirrors file that you are about to edit.  Would you like to use \\e[1;32mnano\\e[1;34m or \\e[1;32mvi\\e[1;34m to edit the Arch Linux configuration files?  "
 			read -n 1 -p "Answer nano or vi [n|V]? "  nv
 		fi
@@ -162,13 +162,13 @@ rmbloomq() {
 			printf "\\n\\e[1;30m"
 			read -n 1 -p "Refresh $HOME/TermuxArchBloom? [Y|n] " rbuanswer
 			if [[ "$rbuanswer" = [Ee]* ]] || [[ "$rbuanswer" = [Nn]* ]] || [[ "$rbuanswer" = [Qq]* ]];then
-				printf "\\n" 
-				exit $? 
+				printf "\\n"
+				exit $?
 			elif [[ "$rbuanswer" = [Yy]* ]] || [[ "$rbuanswer" = "" ]];then
 				printf "\\e[30mUninstalling $HOME/TermuxArchBloom…\\n"
 				if [[ -d "$HOME"/TermuxArchBloom ]];then
-					rm -rf "$HOME"/TermuxArchBloom 
-				else 
+					rm -rf "$HOME"/TermuxArchBloom
+				else
 					printf "Uninstalling $HOME/TermuxArchBloom, nothing to do for $installdir.\\n\\n"
 				fi
 				printf "Uninstalling $HOME/TermuxArchBloom done.\\n\\n"
@@ -185,7 +185,7 @@ runfinishsetupq() {
 		printf "\\n\\e[0;32mWould you like to run \\e[1;32mfinishsetup.sh\\e[0;32m to complete the Arch Linux configuration and update now, or at a later time?  \\e[1;32mNow is recommended.  \\e[0;32m"
 		read -n 1 -p "Answer yes to complete the Arch Linux configuration and update now; Or answer no for later [Y|n] " nl
 	if [[ "$nl" = [Yy]* ]] || [[ "$nl" = "" ]];then
-		runfinishsetup 
+		runfinishsetup
 		break
 	elif [[ "$nl" = [Nn]* ]];then
 		printf "\\n\\e[0;32mSet the geographically nearby mirror in \\e[1;32m/etc/pacman.d/mirrorlist\\e[0;32m first.  Then use \\e[1;32m$installdir/root/bin/setupbin.sh\\e[0;32m in Termux to run \\e[1;32mfinishsetup.sh\\e[0;32m or simply \\e[1;32mfinishsetup.sh\\e[0;32m in Arch Linux Termux PRoot to complete the Arch Linux configuration and update."

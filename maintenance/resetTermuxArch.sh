@@ -1,7 +1,7 @@
-#!/bin/sh -e 
+#!/bin/sh -e
 # Copyright 2017-2018 by SDRausty. All rights reserved.
 # Website for this project at https://sdrausty.github.io/TermuxArch
-# See https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank You 
+# See https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank You
 #############################################################################
 mv .git/config ~/saved_git_config
 rm -rf .git
