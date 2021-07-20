@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 [ -d sdk ] && cd "$HOME/sdk" || mkdir -p "$HOME/sdk" && cd "$HOME/sdk"
 PAGES="ndk sdk studio"
-for ONEPAGE in $PAGES 
+for ONEPAGE in $PAGES
 do
 if [ -f "$ONEPAGE" ]
 then
