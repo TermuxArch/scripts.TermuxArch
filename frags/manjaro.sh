@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+# Contributed by github.com/xd003 via pull request github.com/TermuxArch/scripts.TermuxArch/pull/1
 export DIALOGOPTS="--clear --colors --no-collapse"
 export DIALOG_OK=0
 export DIALOG_CANCEL=1
