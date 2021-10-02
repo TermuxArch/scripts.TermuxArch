@@ -9,7 +9,8 @@ PERRS="$(du "$1" 2>&1 >/dev/null | sed "s/du: cannot read directory '//g" | sed 
 SDIRS="apex data"
 for SDIR in $SDIRS
 do
-[ -d "$1/$SDIR" ] && printf "%s" "Deleting $1/$SDIR: " && rm -rf "$1/$SDIR" && printf "%s\n" "DONE"
+RMDIR="$1/$SDIR"
+[ -d "$RMDIR" ] && printf "%s" "Deleting $RMDIR: " && rm -rf "${RMDIR:?}" && printf "%s\n" "DONE"
 done
 printf "%s\n" "Script '${0##*/}': DONE"
 }
