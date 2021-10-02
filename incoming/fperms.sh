@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env /usr/bin/sh
 ## Copyright 2021 (c) by SDRausty, all rights reserved, see LICENSE
 ## hosting termuxarch.github.io/TermuxArch courtesy pages.github.com
 ################################################################################
